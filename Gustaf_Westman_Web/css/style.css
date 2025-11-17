@@ -6,18 +6,36 @@
 /* ==========================================================
    TIPOGRAFÍAS (LOCAL)
    ========================================================== */
-@font-face {
-    font-family: "HeitiSC";
-    src: url("./fonts/Heiti-SC.otf") format("opentype"),
-         url("./fonts/Heiti-SC.ttf") format("truetype");
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal
 }
 
-@font-face {
-    font-family: "HighCruiser";
-    src: url("./fonts/HighCruiser.otf") format("opentype"),
-         url("./fonts/HighCruiser.ttf") format("truetype");
+.balsamiq-sans-regular {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
+.balsamiq-sans-bold {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.balsamiq-sans-regular-italic {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.balsamiq-sans-bold-italic {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
 
 /* ==========================================================
    GLOBAL
@@ -25,7 +43,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "HeitiSC", sans-serif;
+    font-family:"Montserrat", sans-seri;
     background: #ffffff;
     color: #000;
     overflow-x: hidden;
@@ -63,7 +81,7 @@ img {
 .header__nav a {
     font-size: 25px;
     text-decoration: none;
-    font-family: "HeitiSC";
+    font-family: "Montserrat", sans-serif;
     color: #000;
     letter-spacing: 0.5px;
 }
@@ -84,8 +102,8 @@ img {
 }
 
 .catalog-title {
-    font-family: "HighCruiser";
-    font-size: 165px;
+    font-family: "Balsamiq Sans", sans-serif;
+    font-size: 7rem;
     margin: 0;
     line-height: 160px;
     letter-spacing: 7px;
@@ -96,7 +114,7 @@ img {
     right: 120px;
     top: 70px;
 
-    font-family: "HeitiSC";
+    font-family: "Montserrat", sans-serif;
     font-size: 38px;
     color: #f59046;
     text-align: right;
@@ -119,7 +137,7 @@ img {
 
 .product img {
     width: 100%;
-    height: 500px;
+    height: 350px;
     object-fit: cover;
 }
 
