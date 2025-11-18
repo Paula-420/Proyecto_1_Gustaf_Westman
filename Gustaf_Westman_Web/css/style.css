@@ -37,9 +37,6 @@
   font-style: italic;
 }
 
-/* ==========================================================
-   GLOBAL
-   ========================================================== */
 body {
     margin: 0;
     padding: 0;
@@ -123,7 +120,7 @@ img {
 
 
 /* ==========================================================
-   GRID DE PRODUCTOS 1920px (3 columnas exactas)
+   GRID DE PRODUCTOS
    ========================================================== */
 .products-grid {
     width: 100%;
@@ -393,4 +390,99 @@ RESPONSIVE — MÓVIL (hasta 600px)
         align-items: flex-start;
     }
     }
+
+
+/* ==========================================================
+   ENHANCEMENTS — smooth scroll, hover, animations
+   ========================================================== */
+
+/* Smooth scroll for internal anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Header nav hover */
+.header__nav a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #f59046;
+  transition: width 0.2s ease;
+}
+
+.header__nav a:hover {
+  color: #f59046;
+}
+
+.header__nav a:hover::after {
+  width: 100%;
+}
+
+/* Cart hover */
+.header__cart img {
+  transition: transform 0.2s ease;
+}
+
+.header__cart img:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Product hover card effect */
+.product {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.product img {
+  border-radius: 18px;
+  transition: transform 0.35s ease;
+}
+
+.product:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+}
+
+.product:hover img {
+  transform: scale(1.05);
+}
+
+/* Footer links smoother hover (keeps underline) */
+.footer__list a,
+.footer__legal a,
+.footer__note a {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.footer__list a:hover,
+.footer__legal a:hover,
+.footer__note a:hover {
+  color: #ffe7ba;
+  opacity: 1;
+}
+
+/* Scroll reveal base state */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+/* Visible state */
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
