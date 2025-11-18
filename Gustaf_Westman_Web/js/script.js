@@ -42,3 +42,5 @@ document.addEventListener('DOMContentLoaded', () => {
     toAnimate.forEach(el => el.classList.add('is-visible'));
   }
 });
+
+

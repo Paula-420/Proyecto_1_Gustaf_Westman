@@ -89,6 +89,33 @@ img {
     object-fit: contain;
 }
 
+.header__cart {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 2px 6px;
+}
+
+.add-cart {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #f59046;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
 
 /* ==========================================================
    TITULOS (1920px exact spacing)
@@ -149,6 +176,40 @@ img {
     font-size: 22px;
     opacity: 0.9;
 }
+
+/* Contenedor general del producto */
+.product-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* espacio entre título y precio-icono */
+}
+
+/* Fila inferior con precio e icono alineados */
+.product-bottom {
+    display: flex;
+    justify-content: space-between; /* precio a la izq — icono a la der */
+    align-items: center;
+    margin-top: 5px;
+}
+
+/* Estilos del precio */
+.product-bottom .price {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Estilos del icono del carrito */
+.product-bottom .add-cart {
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.product-bottom .add-cart:hover {
+    color: #ff4f8b; /* color al hover (modifica el que quieras) */
+    transform: scale(1.1);
+}
+
 
 
 /* ==========================================================

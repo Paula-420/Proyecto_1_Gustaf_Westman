@@ -22,7 +22,8 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     >
-
+    <!-- Iconos -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -41,8 +42,12 @@
         </nav>
 
         <div class="header__cart">
-            <img src="imgs/carrito de compra.png" alt="Carrito">
-        </div>
+    <a href="cart.html">
+        <img src="imgs/carrito de compra.png" alt="Carrito">
+        <span id="cart-count" class="cart-count">0</span>
+    </a>
+</div>
+
     </header>
 
     <!-- TITLE SECTION -->
@@ -58,11 +63,19 @@
     <!-- PRODUCT GRID -->
     <section class="products-grid">
         <!-- PRODUCT ITEM -->
-        <article class="product">
-            <img src="imgs/PINK CHUNKY MUG.jpg" alt="Pink Chunky Mug">
-            <h3 class="product-title">PINK CHUNKY MUG</h3>
-            <p class="product-price">85,00 €</p>
-        </article>
+         <article class="product"> 
+    <div class="product-box">
+        <img src="imgs/PINK CHUNKY MUG.jpg" alt="" class="product-img" />
+
+        <h2 class="product-title">PINK CHUNKY MUG</h2>
+
+        <div class="product-bottom">
+            <span class="price">85 €</span>
+            <i class="bx bx-shopping-bag add-cart"></i>
+        </div>
+    </div>
+</article>
+
 
         <article class="product">
             <img src="imgs/Chunky vase.jpg" alt="Pink Chunky Vase">
