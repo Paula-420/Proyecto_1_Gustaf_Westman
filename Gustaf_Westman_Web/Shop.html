@@ -292,7 +292,7 @@
 <section id="cart" class="cart container my-5">
     <div class="cart-header">
         <h2>Tu carrito</h2>
-        <i class='bx bx-x cart-close'></i> 
+        <button type="button" class="btn-close" aria-label="Close"></button>
     </div>
 
     <div id="cart-empty" class="text-muted">Tu carrito está vacío.</div>
@@ -357,7 +357,7 @@
                     y drops exclusivos.
                 </p>
 
-                <form class="row g-2" action="#" method="post">
+                <form id="newsletter-form" class="row g-2" action="#" method="post">
                     <div class="col-12 col-md-8">
                         <input
                             type="email"
@@ -397,6 +397,28 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"></script>
 
+<!-- MODAL: Suscripción exitosa -->
+<div class="modal fade" id="newsletterSuccessModal" tabindex="-1" aria-labelledby="newsletterSuccessLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newsletterSuccessLabel">¡Suscripción exitosa!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        Te has suscrito correctamente al newsletter.  
+        ¡Gracias por unirte a nuestra comunidad!
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
     <!-- JS -->
     <script src="js/script.js"></script>
 
@@ -438,5 +460,19 @@
             }
         });
     </script>
+
+<button id="scrollToTopBtn" 
+        class="btn btn-dark rounded-circle shadow-lg position-fixed d-flex align-items-center justify-content-center hide"
+        style="width: 60px; height: 60px; bottom: 25px; right: 25px; z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;">
+    
+    <i class="bx bx-up-arrow-alt" style="font-size: 28px;"></i>
+
+    <span id="scrollToTopBadge" 
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          style="font-size: 14px; padding: 6px 8px;">
+      0
+    </span>
+</button>
+
 </body>
 </html>
