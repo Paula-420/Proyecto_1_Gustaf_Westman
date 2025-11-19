@@ -292,7 +292,7 @@
 <section id="cart" class="cart container my-5">
     <div class="cart-header">
         <h2>Tu carrito</h2>
-        <i class='bx bx-x cart-close'></i> <!-- 👈 AÑADIR CLASE cart-close -->
+        <i class='bx bx-x cart-close'></i> 
     </div>
 
     <div id="cart-empty" class="text-muted">Tu carrito está vacío.</div>
@@ -307,68 +307,6 @@
     <button id="go-to-checkout" class="btn btn-dark mt-3" disabled>
         Ir al pago
     </button>
-</section>
-
-<!-- CHECKOUT / PAGO -->
-<section id="checkout" class="checkout container my-5">
-    <h2>Datos de pago</h2>
-    <p class="text-muted">Rellena tus datos para finalizar la compra.</p>
-
-    <form id="checkout-form" class="row g-3">
-        <!-- Datos personales -->
-        <div class="col-md-6">
-            <label for="fullName" class="form-label">Nombre completo</label>
-            <input type="text" class="form-control" id="fullName" required>
-        </div>
-
-        <div class="col-md-6">
-            <label for="email" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="email" required>
-        </div>
-
-        <!-- Dirección -->
-        <div class="col-12">
-            <label for="address" class="form-label">Dirección</label>
-            <input type="text" class="form-control" id="address" required>
-        </div>
-
-        <div class="col-md-6">
-            <label for="city" class="form-label">Ciudad</label>
-            <input type="text" class="form-control" id="city" required>
-        </div>
-
-        <div class="col-md-3">
-            <label for="zip" class="form-label">Código postal</label>
-            <input type="text" class="form-control" id="zip" required>
-        </div>
-
-        <div class="col-md-3">
-            <label for="country" class="form-label">País</label>
-            <input type="text" class="form-control" id="country" value="España" required>
-        </div>
-
-        <!-- Datos de tarjeta (demo) -->
-        <div class="col-md-6">
-            <label for="cardNumber" class="form-label">Número de tarjeta</label>
-            <input type="text" class="form-control" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required>
-        </div>
-
-        <div class="col-md-3">
-            <label for="cardExpiry" class="form-label">Caducidad</label>
-            <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA" required>
-        </div>
-
-        <div class="col-md-3">
-            <label for="cardCvv" class="form-label">CVV</label>
-            <input type="password" class="form-control" id="cardCvv" maxlength="4" required>
-        </div>
-
-        <div class="col-12">
-            <button type="submit" class="btn btn-success w-100">
-                Confirmar pedido
-            </button>
-        </div>
-    </form>
 </section>
 
 
