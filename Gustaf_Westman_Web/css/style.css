@@ -97,6 +97,35 @@ img {
     border-radius: 50%;
     padding: 2px 6px;
 }
+/* ==========================================================
+   SLIDE-UP DEL CARRITO
+   ========================================================== */
+#cart {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 70vh;
+    background: #ffffff;
+    transform: translateY(100%);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 24px 32px 24px;
+    overflow-y: auto;
+}
+
+/* Estado abierto */
+#cart.cart--open {
+    transform: translateY(0);
+}
+
+/* Ajuste para que no meta tanto margen extra al ser fixed */
+#cart.container.my-5 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
 
 /* ==========================================================
    TÍTULOS
@@ -202,6 +231,25 @@ img {
     color: #ff4f8b;
     transform: scale(1.1);
 }
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-close {
+    font-size: 32px;
+    cursor: pointer;
+    color: #333;
+    transition: transform .2s ease, color .2s ease;
+}
+
+.cart-close:hover {
+    color: #f59046;
+    transform: scale(1.1);
+}
+
 
 /* ==========================================================
    FOOTER COMPLETO
@@ -439,6 +487,11 @@ img {
     .footer__bottom {
         flex-direction: column;
         align-items: flex-start;
+    }
+     #cart {
+        max-height: 85vh;
+        padding: 18px 16px 24px 16px;
+        border-radius: 18px 18px 0 0;
     }
 }
 

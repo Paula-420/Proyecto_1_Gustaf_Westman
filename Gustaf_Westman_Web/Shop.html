@@ -61,7 +61,7 @@
         </nav>
 
        <div class="header__cart">
-    <a href="#cart">
+    <a href="#cart" class="js-open-cart">
         <img src="imgs/carrito de compra.png" alt="Carrito">
         <span id="cart-count" class="cart-count">0</span>
     </a>
@@ -290,7 +290,11 @@
 
     <!-- CARRITO -->
 <section id="cart" class="cart container my-5">
-    <h2>Tu carrito</h2>
+    <div class="cart-header">
+        <h2>Tu carrito</h2>
+        <i class='bx bx-x cart-close'></i> <!-- 👈 AÑADIR CLASE cart-close -->
+    </div>
+
     <div id="cart-empty" class="text-muted">Tu carrito está vacío.</div>
 
     <div id="cart-items"></div>
@@ -308,7 +312,7 @@
 <!-- CHECKOUT / PAGO -->
 <section id="checkout" class="checkout container my-5">
     <h2>Datos de pago</h2>
-    <p class="text-muted">Rellena tus datos para finalizar la compra. (Demo, no se realiza ningún cobro real)</p>
+    <p class="text-muted">Rellena tus datos para finalizar la compra.</p>
 
     <form id="checkout-form" class="row g-3">
         <!-- Datos personales -->
@@ -340,7 +344,7 @@
 
         <div class="col-md-3">
             <label for="country" class="form-label">País</label>
-            <input type="text" class="form-control" id="country" value="Sweden" required>
+            <input type="text" class="form-control" id="country" value="España" required>
         </div>
 
         <!-- Datos de tarjeta (demo) -->

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /* Smooth scroll for #anchors */
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  /* Smooth scroll para anchors, EXCEPTO el link del carrito */
+  document.querySelectorAll('a[href^="#"]:not(.js-open-cart)').forEach(link => {
     link.addEventListener('click', e => {
       const href = link.getAttribute('href');
       if (!href || href === '#') return;
@@ -52,6 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const goToCheckoutBtn = document.getElementById('go-to-checkout');
     const checkoutForm = document.getElementById('checkout-form');
 
+
+    const cartSection = document.getElementById('cart');
+    const cartToggleLink = document.querySelector('.js-open-cart');
+    const cartCloseBtn = document.querySelector('.cart-close'); 
+
+    if (cartCloseBtn && cartSection) {
+    cartCloseBtn.addEventListener('click', () => {
+        cartSection.classList.remove('cart--open'); // Cierra el slide
+    });
+}
+
+    // --- TOGGLE SLIDE-UP DEL CARRITO ---
+    if (cartToggleLink && cartSection) {
+        cartToggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartSection.classList.toggle('cart--open'); // clase que pusimos en el CSS
+        });
+    }
+
     // Estado del carrito
     let cart = [];
 
@@ -95,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         item.quantity += delta;
         if (item.quantity <= 0) {
-            // eliminar si llega a 0
             cart = cart.filter(i => i.id !== id);
         }
         updateCartUI();
@@ -106,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function formatCurrency(value) {
-        // Formato europeo con coma y € al final
         return value.toLocaleString('es-ES', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
@@ -114,11 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCartUI() {
-        // Actualizar numerito del header
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartCountEl.textContent = totalItems;
 
-        // Carrito vacío
         if (cart.length === 0) {
             cartEmptyEl.style.display = 'block';
             cartItemsContainer.innerHTML = '';
@@ -130,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             goToCheckoutBtn.disabled = false;
         }
 
-        // Pintar items del carrito
         cartItemsContainer.innerHTML = '';
 
         cart.forEach(item => {
@@ -156,12 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsContainer.appendChild(row);
         });
 
-        // Total
         const total = calcTotal();
         cartTotalEl.textContent = formatCurrency(total);
     }
 
-    // Delegación de eventos para +, -, eliminar
     if (cartItemsContainer) {
         cartItemsContainer.addEventListener('click', (e) => {
             const btn = e.target;
@@ -202,15 +214,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Podrías añadir más validaciones aquí si quieres
             alert('¡Gracias por tu compra!');
 
-            // Limpiar carrito y formulario
             cart = [];
             updateCartUI();
             checkoutForm.reset();
 
-            // Scroll arriba del todo
+            // Opcional: cerrar el carrito tras la compra
+            if (cartSection) {
+                cartSection.classList.remove('cart--open');
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
@@ -218,4 +232,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar UI
     updateCartUI();
 });
-
