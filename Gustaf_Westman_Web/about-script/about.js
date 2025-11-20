@@ -1,101 +1,148 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const title = document.getElementById("mainTitle");
-  const sideText = document.getElementById("sideText");
-  const sideImage = document.getElementById("sideImage");
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
+console.clear();
 
-  function easeOutCubic(x) {
-    return 1 - Math.pow(1 - x, 3);
-  }
+// Elementos que vamos a utilizar
+const sections = gsap.utils.toArray(".slide");
+const images = gsap.utils.toArray(".image").reverse();
+const slideImages = gsap.utils.toArray(".slide__img");
+const outerWrappers = gsap.utils.toArray(".slide__outer");
+const innerWrappers = gsap.utils.toArray(".slide__inner");
+const count = document.querySelector(".count");
+const wrap = gsap.utils.wrap(0, sections.length);
+let animating;
+let currentIndex = 0;
 
-  let progress = 0; // Controla el progreso de la animación
-  const startScale = 1.35;
-  const endScale = 1;
-  let locked = true; // Bloquea el scroll hasta que la animación termine
-  let lastScrollY = 0; // Para controlar el scroll hacia arriba/abajo
 
-  title.style.transformOrigin = "left top";
-  title.style.transform = `scale(${startScale}) translateY(10px)`;
-  title.classList.remove("shrink");
+// Configuración inicial de los slides
+gsap.set(outerWrappers, { xPercent: 100 });
+gsap.set(innerWrappers, { xPercent: -100 });
+gsap.set(".slide:nth-of-type(1) .slide__outer", { xPercent: 0 });
+gsap.set(".slide:nth-of-type(1) .slide__inner", { xPercent: 0 });
 
-  // --- SCROLL CON LA ROLLA Y LA BARRA LATERAL ---
-  window.addEventListener("wheel", (e) => {
-    const direction = e.deltaY > 0 ? "down" : "up";
+// Función para ir al siguiente slide
+function gotoSection(index, direction) {
+  animating = true;
+  index = wrap(index);
 
-    if (locked) {
-      e.preventDefault(); // Evitar el desplazamiento por defecto (sólo para la animación)
-
-      if (direction === "down") {
-        progress += e.deltaY * 0.04; // Incremento mayor para mayor velocidad
-        if (progress > 1) progress = 1; // Limitar el progreso a 1 (máximo)
-      } else if (direction === "up") {
-        progress -= e.deltaY * 0.04; // Reducir el progreso para el scroll hacia arriba
-        if (progress < 0) progress = 0; // Limitar el progreso a 0 (mínimo)
-      }
-
-      const eased = easeOutCubic(progress);
-      const currentScale = startScale + (endScale - startScale) * eased;
-      const currentTranslate = 10 * (1 - eased);
-
-      // Animación del título (escala y posición)
-      title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
-
-      // Animación de la imagen (escala sincronizada con el título)
-      sideImage.style.transform = `scale(${1 + (1 - eased) * 0.15})`;
-
-      // Mostrar el texto cuando el progreso sea máximo
-      if (progress >= 1) {
-        locked = false; // Liberar el scroll
-        title.classList.add("shrink"); // Reducir el tamaño del título
-        sideText.classList.add("side-visible"); // Hacer visible el texto
-        sideImage.classList.add("normal"); // Normalizar la imagen
-      } else if (progress <= 0) {
-        locked = true; // Bloquear el scroll cuando el progreso esté en 0
-        title.classList.remove("shrink");
-        sideText.classList.remove("side-visible"); // Ocultar el texto
-        sideImage.classList.remove("normal"); // Restaurar la imagen a su tamaño original
-      }
-    }
-  }, { passive: false });
-
-  // --- SCROLL CON LA BARRA LATERAL ---
-  window.addEventListener("scroll", () => {
-    const direction = window.scrollY > lastScrollY ? "down" : "up";
-    lastScrollY = window.scrollY;
-
-    if (locked) {
-      if (direction === "down") {
-        progress += 0.04; // Aumentar el progreso de la animación
-        if (progress > 1) progress = 1;
-      } else if (direction === "up") {
-        progress -= 0.04; // Reducir el progreso de la animación
-        if (progress < 0) progress = 0;
-      }
-
-      const eased = easeOutCubic(progress);
-      const currentScale = startScale + (endScale - startScale) * eased;
-      const currentTranslate = 10 * (1 - eased);
-
-      // Animación del título
-      title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
-
-      // Animación sincronizada de la imagen
-      sideImage.style.transform = `scale(${1 + (1 - eased) * 0.15})`;
-
-      if (progress >= 1) {
-        locked = false;
-        title.classList.add("shrink");
-        sideText.classList.add("side-visible"); // Hacer visible el texto
-        sideImage.classList.add("normal");
-      }
-
-      if (progress <= 0) {
-        locked = true;
-        title.classList.remove("shrink");
-        sideText.classList.remove("side-visible"); // El texto desaparece
-        sideImage.classList.remove("normal"); // Restaurar la imagen a su tamaño original
-      }
+  let tl = gsap.timeline({
+    defaults: { duration: 1, ease: "expo.inOut" },
+    onComplete: () => {
+      animating = false;
     }
   });
+
+  let currentSection = sections[currentIndex];
+  let heading = currentSection.querySelector(".slide__heading");
+  let nextSection = sections[index];
+  let nextHeading = nextSection.querySelector(".slide__heading");
+
+  gsap.set([sections, images], { zIndex: 0, autoAlpha: 0 });
+  gsap.set([sections[currentIndex], images[index]], { zIndex: 1, autoAlpha: 1 });
+  gsap.set([sections[index], images[currentIndex]], { zIndex: 2, autoAlpha: 1 });
+
+  tl
+    .set(count, { text: index + 1 }, 0.32)
+    .fromTo(
+      outerWrappers[index],
+      { xPercent: 100 * direction },
+      { xPercent: 0 },
+      0
+    )
+    .fromTo(
+      innerWrappers[index],
+      { xPercent: -100 * direction },
+      { xPercent: 0 },
+      0
+    )
+    .to(
+      heading,
+      {
+        "--width": 800,
+        xPercent: 30 * direction
+      },
+      0
+    )
+    .fromTo(
+      nextHeading,
+      { "--width": 800, xPercent: -30 * direction },
+      { "--width": 200, xPercent: 0 },
+      0
+    )
+    .fromTo(
+      images[index],
+      { xPercent: 125 * direction, scaleX: 1.5, scaleY: 1.3 },
+      { xPercent: 0, scaleX: 1, scaleY: 1, duration: 1 },
+      0
+    )
+    .fromTo(
+      images[currentIndex],
+      { xPercent: 0, scaleX: 1, scaleY: 1 },
+      { xPercent: -125 * direction, scaleX: 1.5, scaleY: 1.3 },
+      0
+    )
+    .fromTo(
+      slideImages[index],
+      { scale: 2 },
+      { scale: 1 },
+      0
+    )
+    .timeScale(0.8);
+
+  currentIndex = index;
+}
+
+// Configuración de Observer para manejar scroll y gestos
+let sliderObserver = Observer.create({
+  target: "#gsap-slider",  // Activar solo dentro de la zona del slider
+  type: "wheel,touch,pointer",
+  preventDefault: true,
+  wheelSpeed: -1,
+  paused: true, // Pausado por defecto, se activará con ScrollTrigger
+  onUp: () => {
+    if (!animating) gotoSection(currentIndex + 1, +1);
+  },
+  onDown: () => {
+    if (!animating) gotoSection(currentIndex - 1, -1);
+  },
+  tolerance: 10
 });
-/* 
-PROJECTS  */
+
+// Función para activar el slider
+function enableSlider() {
+  sliderObserver.enable();
+}
+
+// Función para desactivar el slider
+function disableSlider() {
+  sliderObserver.disable();
+}
+
+// Configuración de ScrollTrigger para manejar la activación y desactivación del slider
+ScrollTrigger.create({
+  trigger: "#gsap-slider",  // Solo activamos dentro del slider
+  start: "top top",         // Se activa cuando la parte superior del slider toca la parte superior de la ventana
+  end: "bottom bottom",     // Se desactiva cuando el slider sale del viewport
+  onEnter: () => enableSlider(),        // Activar el Observer cuando entra
+  onEnterBack: () => enableSlider(),   // Activar al entrar desde abajo
+  onLeave: () => disableSlider(),      // Desactivar cuando sale
+  onLeaveBack: () => disableSlider()   // Desactivar cuando se vuelve a salir desde arriba
+});
+
+// Controlar navegación con teclas
+document.addEventListener("keydown", logKey);
+
+function logKey(e) {
+  console.log(e.code);
+  if ((e.code === "ArrowUp" || e.code === "ArrowLeft") && !animating) {
+    gotoSection(currentIndex - 1, -1);
+  }
+  if (
+    (e.code === "ArrowDown" ||
+      e.code === "ArrowRight" ||
+      e.code === "Space" ||
+      e.code === "Enter") &&
+    !animating
+  ) {
+    gotoSection(currentIndex + 1, 1);
+  }
+}

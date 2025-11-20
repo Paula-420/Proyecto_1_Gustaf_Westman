@@ -245,109 +245,53 @@ button.btn-danger:hover {
 /* Contenedor principal de la barra de desplazamiento */
 /* Contenedor principal de la barra de desplazamiento */
 
-.scrolling-text {
-  overflow: hidden;
-  width: 100%;
-  height: 100vh;
+/* Elimina los valores que bloquean la posición en la parte superior */
+/* Corregir las propiedades de la imagen */
+/* Asegurarse de que el contenedor esté alineado correctamente */
+/* Estilo del slider, asegurando que ocupe todo el espacio */
+/* Asegura que el contenedor principal de las slides y el overlay esté en la misma capa */
+/* Estilo principal del slider */
+/* Estilo principal del slider *//* Estilo principal del slider */
+/* Estilo principal del slider */
+/* Estilo principal del slider */
+#gsap-slider {
   display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: var(--color-just-black);
-}
-.scrolling-text .rail {
-  display: flex;
-}
-.scrolling-text .rail h4 {
-  white-space: nowrap;
-  font-size: 100px;
-  font-weight: 900;
-  letter-spacing: ls(120);
-  line-height: 1em;
-  margin: 0 30px 0 0;
-  color: var(--color-surface-white);
-}
-
-
-/* Animación del desplazamiento del texto */
-
-/* HTML: <div class="loader"></div> */
-
-
-/* PROJECTOS */
-
-/* Contenedor de las secciones de slide */
-@font-face {
-  font-family: "Bandeins Sans & Strange Variable";
-  src: url("https://res.cloudinary.com/dldmpwpcp/raw/upload/v1566406079/BandeinsStrangeVariable_esetvq.ttf");
-}
-@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
-
-/* * {
-  box-sizing: border-box;
-  user-select: none;
-}
- */
-
-
-/* html,
-body {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  height: -webkit-fill-available;
-}
-
-body {
-  color: #fff;
-  background: #4361ee;
-  font-family: "Sora", sans-serif;
-}
-
-footer {
-  position: fixed;
-  z-index: 999;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  width: 100%;
-  height: 7em;
-  font-family: "Sora", sans-serif;
-  font-size: clamp(1.2rem, 2vw, 1rem);
-}
-
-a {
-  color: #fff;
-  text-decoration: none;
-}
- */
-/* Sección Projects */
-.projects {
-  height: 100%;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
   width: 100%;
   position: relative;
-  visibility: visible;
 }
 
-.projects__outer,
-.projects__inner {
+/* Estilo de las slides */
+.slide {
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+ 
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+}
+
+/* Contenedor de la imagen dentro de cada slide */
+.slide__outer, .slide__inner {
   width: 100%;
   height: 100%;
   overflow-y: hidden;
 }
-
-.projects__content {
+.slide__content {
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   height: 100%;
   width: 100%;
-  top: 0;
+ 
 }
 
-.projects__container {
+/* Estilo del contenedor de cada slide, usando grid */
+.slide__container {
   position: relative;
   max-width: 1400px;
   width: 100vw;
@@ -355,134 +299,148 @@ a {
   height: 90vh;
   margin-bottom: 10vh;
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr); /* Definimos las columnas del grid */
+  grid-template-rows: repeat(10, 1fr); /* Definimos las filas del grid */
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   padding: 0 1rem;
 }
 
-.projects__heading {
-  --width: 200;
+/* Estilo del texto dentro de las slides */
+.slide__heading {
+  --width: 300;
   display: block;
-  text-align: left;
-  font-family: "Bandeins Sans & Strange Variable";
+  text-align: center; /* Alinea el texto en el centro */
   font-size: clamp(5rem, 15vw, 15rem);
   font-weight: 900;
   font-variation-settings: "wdth" var(--width);
   margin: 0;
   padding: 0;
   color: #f2f1fc;
-  z-index: 999;
+  z-index: 3; /* Asegura que el texto esté encima de las imágenes */
   mix-blend-mode: difference;
-  grid-area: 2 / 2 / 3 / 10;
+  grid-area: 2/2/3/10; /* Ajusta la posición en el grid */
   align-self: end;
+  position: absolute; /* Lo coloca encima de la imagen */
+ 
 }
 
-.projects__img-cont {
-  margin-top: 4rem;
-  grid-area: 2 / 1 / 7 / 8;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+/* Contenedor de la imagen dentro de cada slide */
+.slide__img-cont {
+    margin-top: 5rem;
+ 
+  grid-area: 2/1/7/8; /* Ajusta el área en el grid donde la imagen será colocada */
 }
 
-.projects__outer {
-  /* Añadimos visibilidad para que los slides sean visibles */
+/* Ajuste de las imágenes dentro de la slide */
+.slide__img-cont img {
+ width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen esté recortada proporcionalmente sin distorsión */
+  
+}
+
+/* Ajuste de las imágenes dentro de la slide */
+.slide:nth-of-type(1) {
   visibility: visible;
 }
-
-.projects__inner {
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.6s, transform 0.6s;
+.slide:nth-of-type(1) .slide__content {
+  background-color: #D1052D;
 }
 
-/* Estilos para los tres proyectos */
-.projects:nth-child(1) .projects__inner {
-  visibility: visible;
+.slide:nth-of-type(2) .slide__content {
+  background-color: #FCCF40;
 }
 
-.projects:nth-child(2) .projects__inner {
-  background-color: #355070;
+.slide:nth-of-type(3) .slide__content {
+  background-color: #27389F;
 }
 
-.projects:nth-child(3) .projects__inner {
-  background-color: #b56576;
+.slide:nth-of-type(4) .slide__content {
+  background-color: #97D6FB;
 }
 
+/* Estilo del overlay */
 .overlay {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 25%;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 2; /* Overlay encima de las slides */
+
 }
 
+
+/* Contenedor de las imágenes en el overlay */
 .overlay__content {
   max-width: 1400px;
-  width: 100vw;
+   width: 100vw;
   margin: 0 auto;
   padding: 0 1rem;
   height: 90vh;
   margin-bottom: 10vh;
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr); /* Usamos el mismo grid para el overlay */
+  grid-template-rows: repeat(10, 1fr); /* Usamos el mismo grid para el overlay */
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
 
+/* Contenedor de imágenes dentro del overlay */
 .overlay__img-cont {
+  
   position: relative;
-  overflow: hidden;
   margin: 0;
-  grid-area: 4 / 3 / 9 / 11;
-
-.img-proyects {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-  }
+  overflow: hidden;
+  grid-area: 4/3/9/11; /* Ajusta el área del grid donde la imagen será colocada */
 }
 
+/* Estilo de las imágenes dentro del overlay */
+.overlay__img-cont img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen se ajuste adecuadamente */
+   object-position: 50% 50%;
+}
+
+/* Contador dentro del overlay */
 .overlay__count {
-  grid-area: 3 / 10 / 4 / 10;
+  grid-area: 3/10/4/10;
   font-size: clamp(3rem, 4vw, 15rem);
+  color: #f9d7d7;
+  position: absolute;
   margin: 0;
   padding: 0;
   text-align: right;
   border-bottom: 7px white solid;
 }
 
+
 @media screen and (min-width: 900px) {
   .overlay__content,
-  .projects__container {
+.slide__container {
     padding: 0 3rem;
     margin-top: 10vh;
     height: 80vh;
   }
 
   .overlay__img-cont {
-    grid-area: 5 / 4 / 10 / 11;
+    grid-area: 5/4/10/11;
   }
 
   .overlay__count {
-    grid-area: 3 / 10 / 4 / 11;
+    grid-area: 3/10/4/11;
   }
 
-  .projects__img-cont {
+  .slide__img-cont {
     margin-top: 0;
-    grid-area: 3 / 2 / 8 / 7;
+    grid-area: 3/2/8/7;
   }
 
-  .projects__heading {
-    grid-area: 1 / 1 / 4 / 10;
+  .slide__heading {
+    grid-area: 1/1/4/10;
   }
 }
+
