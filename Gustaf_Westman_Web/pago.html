@@ -28,7 +28,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css-paula/style.css" />
 
     <!-- ESTILOS PARA LA ANIMACIÓN DE SCROLL -->
     <style>
@@ -51,18 +51,18 @@
      <!-- HEADER -->
     <header class="header">
         <div class="header__logo">
-            <img src="imgs/icon_web.gif" alt="Gustaf Westman logo">
+            <img src="imgs-paula/icon_web.gif" alt="Gustaf Westman logo">
         </div>
 
         <nav class="header__nav">
-            <a href="Proyectos.html">Proyects</a>
-            <a href="Shop.html">Shop</a>
-            <a href="index.html">About</a>
+            <a href="index.html">Proyects</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
         </nav>
 
        <div class="header__cart">
     <a href="#cart" class="js-open-cart">
-        <img src="imgs/carrito de compra.png" alt="Carrito">
+        <img src="imgs-paula/carrito de compra.png" alt="Carrito">
         <span id="cart-count" class="cart-count">0</span>
     </a>
     </div>
@@ -71,7 +71,7 @@
  <!-- CHECKOUT / PAGO -->
 <section id="checkout" class="checkout container my-5">
     <div class="checkout-back">
-        <a href="Shop.html">Regresar al catálogo</a>
+        <a href="shop.html">Regresar al catálogo</a>
     </div>
 
     <h2>Datos de pago</h2>
@@ -134,13 +134,35 @@
         </div>
     </form>
 </section>  
+
+ <!-- CARRITO -->
+<section id="cart" class="cart container my-5">
+    <div class="cart-header">
+        <h2>Tu carrito</h2>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+
+    <div id="cart-empty" class="text-muted">Tu carrito está vacío.</div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-summary mt-3 d-flex justify-content-between align-items-center">
+        <span class="fw-bold">Total:</span>
+        <span id="cart-total" class="fw-bold">0,00 €</span>
+    </div>
+
+    <button id="go-to-checkout" class="btn btn-dark mt-3" disabled>
+        Ir al pago
+    </button>
+</section>
+
 </body>
   <!-- FOOTER COMPLETO -->
     <footer class="footer">
         <div class="footer__inner">
             <!-- Columna 1: Marca -->
             <div class="footer__brand">
-                <img src="imgs/icon_web.gif" alt="Logo Gustaf Westman">
+                <img src="imgs-paula/icon_web.gif" alt="Logo Gustaf Westman">
                 <p class="footer__brand-name">Gustaf Westman Studio</p>
                 <p class="footer__brand-text">
                     Mugs, chunky glasses, mirrors & playful furniture.
@@ -151,9 +173,9 @@
             <div class="footer__column">
                 <h4 class="footer__title">Explore</h4>
                 <ul class="footer__list">
-                    <li><a href="Proyectos.html">Proyects</a></li>
-                    <li><a href="Shop.html">Shop</a></li>
-                    <li><a href="index.html">About</a></li>
+                    <li><a href="index.html">Proyects</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
                 </ul>
             </div>
 
@@ -216,6 +238,10 @@
             </div>
         </div>
     </footer>
+
+    <!-- JS -->
+    <script src="js-paula/script.js"></script>
+
 
 <!-- SCRIPT PARA LA ANIMACIÓN DE SCROLL -->
     <script>

@@ -421,44 +421,6 @@
     <!-- JS -->
     <script src="js-paula/script.js"></script>
 
-    <!-- SCRIPT PARA LA ANIMACIÓN DE SCROLL -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const products = document.querySelectorAll('.product');
-
-            
-            if ('IntersectionObserver' in window) {
-                const options = {
-                    threshold: 0.2 
-                };
-
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, options);
-
-                products.forEach(product => observer.observe(product));
-            } else {
-                const onScroll = () => {
-                    const triggerBottom = window.innerHeight * 0.8;
-
-                    products.forEach(product => {
-                        const rect = product.getBoundingClientRect();
-                        if (rect.top < triggerBottom) {
-                            product.classList.add('is-visible');
-                        }
-                    });
-                };
-
-                window.addEventListener('scroll', onScroll);
-                onScroll(); 
-            }
-        });
-    </script>
 
 <button id="scrollToTopBtn" 
         class="btn btn-dark rounded-circle shadow-lg position-fixed d-flex align-items-center justify-content-center hide"
