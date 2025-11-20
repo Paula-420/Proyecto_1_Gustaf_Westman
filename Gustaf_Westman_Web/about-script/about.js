@@ -12,7 +12,6 @@ const wrap = gsap.utils.wrap(0, sections.length);
 let animating;
 let currentIndex = 0;
 
-
 // Configuración inicial de los slides
 gsap.set(outerWrappers, { xPercent: 100 });
 gsap.set(innerWrappers, { xPercent: -100 });
@@ -122,11 +121,20 @@ ScrollTrigger.create({
   trigger: "#gsap-slider",  // Solo activamos dentro del slider
   start: "top top",         // Se activa cuando la parte superior del slider toca la parte superior de la ventana
   end: "bottom bottom",     // Se desactiva cuando el slider sale del viewport
-  onEnter: () => enableSlider(),        // Activar el Observer cuando entra
-  onEnterBack: () => enableSlider(),   // Activar al entrar desde abajo
+  onEnter: () => {
+    enableSlider(); // Activar el Observer cuando entra
+    ScrollTrigger.refresh(); // Refresca ScrollTrigger para asegurar que los cálculos sean correctos
+  },
+  onEnterBack: () => {
+    enableSlider(); // Activar al entrar desde abajo
+    ScrollTrigger.refresh(); // Refresca ScrollTrigger para asegurar que los cálculos sean correctos
+  },
   onLeave: () => disableSlider(),      // Desactivar cuando sale
   onLeaveBack: () => disableSlider()   // Desactivar cuando se vuelve a salir desde arriba
 });
+
+// Llamar a `updateRoot` para recalcular las animaciones de GSAP en caso de cambios dinámicos
+gsap.updateRoot();
 
 // Controlar navegación con teclas
 document.addEventListener("keydown", logKey);
@@ -146,3 +154,30 @@ function logKey(e) {
     gotoSection(currentIndex + 1, 1);
   }
 }
+function preloadImages(imageArray) {
+  const promises = imageArray.map((src) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+  });
+  
+  return Promise.all(promises);
+}
+
+// Pre-carga las imágenes antes de iniciar la animación
+const imageSources = [
+  'https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0NjMyMDUzOA&ixlib=rb-1.2.1&q=80&w=400',
+  'images-about/FRAMSIDA LIGGANDE CROP.jpg',
+  'images-about/florero-rosA.png'
+];
+
+preloadImages(imageSources)
+  .then(() => {
+    // Inicialización de la animación
+    console.log("Imágenes cargadas");
+    initAnimations();
+  })
+  .catch((err) => console.error("Error al cargar las imágenes", err));

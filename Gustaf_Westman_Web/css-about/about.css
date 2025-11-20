@@ -259,8 +259,9 @@ button.btn-danger:hover {
   justify-content: center;
   align-items: center;
   height: 100vh; /* Ocupa toda la altura de la pantalla */
-  width: 100%;
+  
   position: relative;
+  margin-bottom: 1rem;
 }
 
 /* Estilo de las slides */
@@ -268,18 +269,27 @@ button.btn-danger:hover {
   position: absolute;
   opacity: 0;
   z-index: 1;
- 
+ top: 0;
   height: 100%;
   width: 100%;
   visibility: hidden;
 }
 
 /* Contenedor de la imagen dentro de cada slide */
-.slide__outer, .slide__inner {
+.slide__inner {
   width: 100%;
   height: 100%;
   overflow-y: hidden;
 }
+.slide__outer {
+  width: 100%; /* Se asegura de que ocupe el 100% del ancho de su contenedor padre */
+  height: 100%;
+  overflow: hidden; /* Ocultamos cualquier desbordamiento en ambos ejes */
+  box-sizing: border-box; /* Asegura que el padding y los bordes no afecten el tamaño del contenedor */
+  padding: 0; /* Evita que el padding cause desbordamientos */
+}
+
+ 
 .slide__content {
   display: flex;
   align-items: center;
@@ -287,16 +297,16 @@ button.btn-danger:hover {
   position: absolute;
   height: 100%;
   width: 100%;
- 
+   top: 0;
 }
 
 /* Estilo del contenedor de cada slide, usando grid */
 .slide__container {
   position: relative;
   max-width: 1400px;
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
-  height: 90vh;
+  height: 80vh;
   margin-bottom: 10vh;
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* Definimos las columnas del grid */
@@ -308,26 +318,26 @@ button.btn-danger:hover {
 
 /* Estilo del texto dentro de las slides */
 .slide__heading {
-  --width: 300;
+  --width: 200;
   display: block;
-  text-align: center; /* Alinea el texto en el centro */
-  font-size: clamp(5rem, 15vw, 15rem);
-  font-weight: 900;
+  text-align: left; /* Alinea el texto en el centro */
+  font-size: clamp(4rem, 14vw, 14rem);
+  
   font-variation-settings: "wdth" var(--width);
+  font-family: "Plus Jakarta Sans", sans-serif;
   margin: 0;
   padding: 0;
-  color: #f2f1fc;
+  color: #FFB7BB;
   z-index: 3; /* Asegura que el texto esté encima de las imágenes */
-  mix-blend-mode: difference;
+ /*  mix-blend-mode: difference; */
   grid-area: 2/2/3/10; /* Ajusta la posición en el grid */
   align-self: end;
-  position: absolute; /* Lo coloca encima de la imagen */
- 
+  
 }
 
 /* Contenedor de la imagen dentro de cada slide */
 .slide__img-cont {
-    margin-top: 5rem;
+    margin-top: 4rem;
  
   grid-area: 2/1/7/8; /* Ajusta el área en el grid donde la imagen será colocada */
 }
@@ -363,22 +373,21 @@ button.btn-danger:hover {
 /* Estilo del overlay */
 .overlay {
   position: absolute;
-  top: 25%;
+  top: 20%;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 2; /* Overlay encima de las slides */
-
 }
 
 
 /* Contenedor de las imágenes en el overlay */
 .overlay__content {
   max-width: 1400px;
-   width: 100vw;
+   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
-  height: 90vh;
+  height: 80vh;
   margin-bottom: 10vh;
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* Usamos el mismo grid para el overlay */
@@ -389,11 +398,11 @@ button.btn-danger:hover {
 
 /* Contenedor de imágenes dentro del overlay */
 .overlay__img-cont {
-  
   position: relative;
-  margin: 0;
   overflow: hidden;
-  grid-area: 4/3/9/11; /* Ajusta el área del grid donde la imagen será colocada */
+  width: 80%;
+  margin: 0;
+  grid-area: 4/3/9/11;
 }
 
 /* Estilo de las imágenes dentro del overlay */
@@ -409,12 +418,11 @@ button.btn-danger:hover {
 .overlay__count {
   grid-area: 3/10/4/10;
   font-size: clamp(3rem, 4vw, 15rem);
-  color: #f9d7d7;
-  position: absolute;
+  color: #FFB7BB;
   margin: 0;
   padding: 0;
   text-align: right;
-  border-bottom: 7px white solid;
+  border-bottom: 7px  #FFB7BB;;
 }
 
 
@@ -422,7 +430,7 @@ button.btn-danger:hover {
   .overlay__content,
 .slide__container {
     padding: 0 3rem;
-    margin-top: 10vh;
+   
     height: 80vh;
   }
 
