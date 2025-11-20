@@ -273,7 +273,7 @@ if (scrollBtn) {
         });
     }
 
-    // Envío del formulario de pago (DEMO, si usas el checkout en la misma página)
+    // Envío del formulario de pago 
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', (e) => {
             e.preventDefault();
