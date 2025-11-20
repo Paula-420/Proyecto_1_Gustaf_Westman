@@ -272,7 +272,8 @@ button.btn-danger:hover {
  top: 0;
   height: 100%;
   width: 100%;
-  visibility: hidden;
+  visibility: visible;
+  
 }
 
 /* Contenedor de la imagen dentro de cada slide */

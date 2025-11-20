@@ -130,30 +130,14 @@ ScrollTrigger.create({
     ScrollTrigger.refresh(); // Refresca ScrollTrigger para asegurar que los cálculos sean correctos
   },
   onLeave: () => disableSlider(),      // Desactivar cuando sale
-  onLeaveBack: () => disableSlider()   // Desactivar cuando se vuelve a salir desde arriba
+  onLeaveBack: () => disableSlider(),  // Desactivar cuando se vuelve a salir desde arriba
+  once: true // Agregamos once: true para evitar que se active más de una vez en un scroll
 });
 
 // Llamar a `updateRoot` para recalcular las animaciones de GSAP en caso de cambios dinámicos
 gsap.updateRoot();
 
-// Controlar navegación con teclas
-document.addEventListener("keydown", logKey);
-
-function logKey(e) {
-  console.log(e.code);
-  if ((e.code === "ArrowUp" || e.code === "ArrowLeft") && !animating) {
-    gotoSection(currentIndex - 1, -1);
-  }
-  if (
-    (e.code === "ArrowDown" ||
-      e.code === "ArrowRight" ||
-      e.code === "Space" ||
-      e.code === "Enter") &&
-    !animating
-  ) {
-    gotoSection(currentIndex + 1, 1);
-  }
-}
+// Pre-cargar las imágenes antes de iniciar la animación
 function preloadImages(imageArray) {
   const promises = imageArray.map((src) => {
     return new Promise((resolve, reject) => {
@@ -163,7 +147,7 @@ function preloadImages(imageArray) {
       img.onerror = reject;
     });
   });
-  
+
   return Promise.all(promises);
 }
 
@@ -171,7 +155,10 @@ function preloadImages(imageArray) {
 const imageSources = [
   'https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0NjMyMDUzOA&ixlib=rb-1.2.1&q=80&w=400',
   'images-about/FRAMSIDA LIGGANDE CROP.jpg',
-  'images-about/florero-rosA.png'
+  'images-about/florero-rosA.png',
+  'images-about/proyecto-mercedes-ben-foto2.jpg',
+  'images-about/proyecto-vingarden-1.jpg',
+  'images-about/proyecto-2-foto1.jpg'
 ];
 
 preloadImages(imageSources)
@@ -181,3 +168,13 @@ preloadImages(imageSources)
     initAnimations();
   })
   .catch((err) => console.error("Error al cargar las imágenes", err));
+
+function initAnimations() {
+  // Aquí puedes iniciar cualquier animación adicional
+  console.log('Animaciones inicializadas');
+   gsap.set(sections[0], { visibility: "visible", opacity: 1 });  // Asegura que la primera slide sea visible al cargar
+
+  // Ahora activa la animación de entrada para la primera slide
+  gotoSection(0, 1); // Esto asegurará que la primera slide ya esté visible
+}
+
