@@ -155,11 +155,11 @@ img {
     position: absolute;
     right: 120px;
     top: 70px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Plus Jakarta Sans';
     font-size: 2rem;
     color: #f59046;
     text-align: right;
-    line-height: 40px;
+    line-height: 30px;
 }
 
 /* ==========================================================
