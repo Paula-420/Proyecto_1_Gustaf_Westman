@@ -337,7 +337,7 @@ $(document).ready(function () {
     $(".btn-reset-8").on("click", function () {
         gsap.set(".box8a, .box8b, .box8c, .box8d", { x: 0 });
     });
-; // Fin document.ready
+}); // Fin document.ready
 
 ------------------------------------------------------------------------------------------------------------------
 
@@ -656,4 +656,477 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 /* Cuando el título se hace pequeño */
-.animated-title.shrink 
+.animated-title.shrink {
+  transform: scale(1) translateY(0);
+  font-size: 2.4rem; /* Tamaño pequeño al final */
+  line-height: 1.3; /* Mantén el line-height */
+  padding-bottom: 2rem; /* Menos espacio cuando el texto está pequeño */
+}
+
+/* --- RESTO DEL CÓDIGO --- */
+
+#mainTitle {
+  transform-origin: left top;
+  transition: transform 0.5s ease, opacity 1s ease;
+  font-size: 3rem; /* Título grande al inicio */
+  max-width: 900px;
+  line-height: 1.3; /* Mantén el line-height original */
+  padding-bottom: 4rem; /* Añadimos más espacio abajo cuando el título está grande */
+}
+
+/* --- TEXTOS DERECHA: scroll reveal --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.side-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.side-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- IMAGEN: Animación de agrandado --- */
+#sideImage {
+  transition: transform 0.7s ease;
+  transform: scale(1.15); /* Imagen más grande al principio */
+  transform-origin: center center; /* El origen de la transformación está en el centro de la imagen */
+  max-width: 100%; /* Aseguramos que no se desborde */
+  margin-right: 20px; /* Ajuste para evitar que se pegue al borde */
+}
+
+/* Cuando el título se hace pequeño, la imagen vuelve a su tamaño normal */
+#sideImage.normal {
+  transform: scale(1);
+  transition: transform 0.7s ease; /* Transición suave cuando vuelva al tamaño original */
+}
+
+/* --- TYPEWRITER PARA LOS TEXTOS DERECHA */
+.typewriter-block {
+  font-size: 1rem;
+  color: #2e3ea8;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #2e3ea8;
+  width: 0;
+  display: inline-block;
+  opacity: 0;
+  animation: cursorBlink 0.7s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { border-color: transparent; }
+  51%, 100% { border-color: #2e3ea8; }
+}
+
+/* Estilo adicional para la nueva colección */
+.new-collection-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #D32F2F; /* Color para "Nueva colección" */
+  letter-spacing: 3px;
+}
+
+.row {
+  padding: 2rem;
+}
+
+button.btn-danger {
+  background-color: #D32F2F;
+  border-color: #D32F2F;
+  color: white;
+  margin-top: 20px;
+}
+
+button.btn-danger:hover {
+  background-color: #C2185B;
+  border-color: #C2185B;
+}
+
+/* Estilo para las tarjetas dentro de la nueva colección */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* --- MEDIA QUERIES --- */
+
+/* Para dispositivos móviles y pantallas pequeñas */
+@media (max-width: 768px) {
+  .animated-title {
+    font-size: 2rem;  /* Título más pequeño en móviles */
+    line-height: 1.3; 
+    padding-bottom: 2rem; /* Reducimos el padding en pantallas pequeñas */
+  }
+
+  #sideImage {
+    transform: scale(1.05); /* Imagen ligeramente más pequeña para pantallas pequeñas */
+  }
+
+  #sideText {
+    font-size: 0.9rem; /* Reducimos el tamaño del texto en pantallas pequeñas */
+  }
+
+  /* En dispositivos móviles, la imagen y el texto se apilan */
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Ajustamos el espaciado entre los elementos */
+  .col-lg-6, .col-lg-4 {
+    margin-bottom: 20px;
+  }
+
+  .side-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .side-hidden {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  #sideText {
+    font-size: 1rem;
+    padding: 0;
+    margin-top: 20px;
+  }
+}
+
+/* Para tabletas y dispositivos con pantallas medianas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .animated-title {
+    font-size: 2.4rem;  /* Ajustamos el tamaño del título para tabletas */
+  }
+
+  #sideImage {
+    transform: scale(1.1); /* Imagen un poco más grande para tabletas */
+  }
+}
+
+
+
+
+
+antiguo 
+document.addEventListener("DOMContentLoaded", () => {
+    const title = document.getElementById("unico-title");
+    const bgImage = document.getElementById("sideImage");
+    const sideText = document.getElementById("sideText");
+
+    // Función de suavizado (ease out cubic)
+    function easeOutCubic(x) {
+        return 1 - Math.pow(1 - x, 3);
+    }
+
+    let progress = 0;
+    const startScale = 1.0; // Valor inicial ajustado para evitar desbordamiento
+    const endScale = 1;
+    let locked = true;
+
+    title.style.transformOrigin = "left top";
+    title.style.transform = `scale(${startScale}) translateY(10px)`;
+
+    /* ----------------------------------------------
+        SCROLL HACIA ABAJO → reducir título y escalar la imagen
+    ---------------------------------------------- */
+    window.addEventListener("wheel", (e) => {
+        const direction = e.deltaY > 0 ? "down" : "up";
+
+        if (locked) {
+            e.preventDefault();
+
+            if (direction === "down") {
+                progress += e.deltaY * 0.0022; // Ajustamos la velocidad del scroll
+                if (progress > 1) progress = 1; // Límite de la animación
+            }
+
+            const eased = easeOutCubic(progress);
+
+            // Cambiar tamaño y escala del texto "Único"
+            const currentScale = startScale + (endScale - startScale) * eased;
+            title.style.transform = `scale(${currentScale}) translateY(${10 * (1 - eased)}px)`;
+
+            // Cambiar tamaño y escala de la imagen
+            const scaleValue = 1 + (eased / 2); // Imagen crece suavemente
+            bgImage.style.transform = `scale(${scaleValue})`;
+
+            // Limitar el ancho de la imagen para evitar desbordamiento
+            const maxWidth = Math.min(100, 30 + eased * 60); // Limita el ancho de la imagen al 100%
+            bgImage.style.width = `${maxWidth}%`;
+
+            // Después de cierto límite, reducir la imagen
+            if (progress >= 0.8) {
+                const scaleDownValue = 0.9 + (eased - 0.8) * 0.2; // Reducción suave
+                bgImage.style.transform = `scale(${scaleDownValue})`;
+            }
+
+            // Cuando la animación de reducción del título termine, mostrar el texto adicional
+            if (progress >= 1) {
+                locked = false;
+                title.classList.add("shrink");
+                sideText.classList.add("side-visible");
+            }
+        }
+
+        /* ----------------------------------------------
+            SCROLL HACIA ARRIBA → volver a grande
+        ---------------------------------------------- */
+        if (!locked && direction === "up" && window.scrollY <= 5) {
+            locked = true;
+            progress = 0;
+
+            title.classList.remove("shrink");
+            title.style.transition = "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+            title.style.transform = `scale(${startScale}) translateY(10px)`;
+
+            // Ocultar el texto cuando el título se agranda
+            sideText.classList.remove("side-visible");
+
+            setTimeout(() => { title.style.transition = ""; }, 600);
+        }
+
+    }, { passive: false });
+});
+
+
+<section id="unico-section">
+    <div class="container-fluid">
+        <!-- Título Único -->
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <h1 id="unico-title" class="display-1 fw-bold">Único</h1>
+            </div>
+        </div>
+
+        <!-- Imagen de fondo debajo del texto "Único" -->
+        <div class="row">
+            <div class="col-12">
+                <img src="images-about/GUSTAF-FONDO-AZUL.jpg" alt="Imagen de Gustaf Westman" class="img-fluid" id="sideImage">
+            </div>
+        </div>
+
+        <!-- Texto adicional alineado a la derecha, en la misma fila que el título "Único" -->
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-end" id="sideTextContainer">
+                <p class="fs-4 text-primary" id="sideText">Gustaf Westman, establecido en 2020, es un estudio de diseño basado en Estocolmo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sección Único */
+#unico-section {
+    position: relative;
+    padding: 10vh 0; /* Espaciado superior e inferior */
+    text-align: center;
+    width: 100%; /* Aseguramos que la sección ocupe el 100% del ancho */
+}
+
+/* Título Único */
+#unico-title {
+    font-size: 15rem; /* El texto ocupa toda la pantalla horizontalmente */
+    font-weight: bold;
+    color: rgb(99, 21, 21);
+    margin-bottom: 40px; /* Espaciado entre el título y la imagen */
+    transition: transform 1s ease, font-size 1s ease; /* Transición suave */
+    transform-origin: left; /* El texto se reduce desde la izquierda */
+}
+
+/* Imagen de fondo debajo del texto "Único" */
+#sideImage {
+    width: 30%; /* Imagen comienza pequeña */
+    height: auto;
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    margin-top: 40px; /* Espaciado entre el título y la imagen */
+    max-width: 100%; /* Limitar la imagen a un máximo del 100% */
+    transform-origin: left; /* La imagen crece desde la izquierda */
+    transition: transform 1s ease, width 1s ease, opacity 1s ease; /* Transición suave */
+    display: block; /* Asegura que la imagen se comporte correctamente */
+    margin-left: 0; /* Asegura que la imagen no se desplace hacia el centro */
+}
+
+/* Texto adicional alineado a la derecha */
+#sideTextContainer {
+    padding-top: 30px; /* Espaciado superior */
+    margin-top: 30px; /* Espaciado superior */
+}
+
+/* Inicialmente oculto y no visible */
+#sideText {
+    visibility: hidden; /* Hace que el texto no sea visible */
+    opacity: 0; /* Totalmente transparente */
+    transform: translateX(50px); /* Empuja el texto hacia la derecha */
+    transition: opacity 1s ease, transform 1s ease; /* Transición suave */
+}
+
+/* Cuando el texto "Único" se reduce, el texto adicional aparece */
+.shrink-title ~ #sideText {
+    visibility: visible; /* Hace que el texto sea visible */
+    opacity: 1;
+    transform: translateX(0); /* El texto se mueve hacia su posición final */
+}
+
+/* Responsividad en pantallas pequeñas */
+@media (max-width: 768px) {
+    #unico-title {
+        font-size: 10vw; /* Texto más pequeño en dispositivos móviles */
+    }
+
+    #sideImage {
+        padding: 0 5vw; /* Márgenes laterales pequeños */
+    }
+}
+
+
+<!-- Sección de nueva colección -->
+
+
+nuevas actualizaciiones 
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.getElementById("mainTitle");
+  const sideText = document.getElementById("sideText");
+  const sideImage = document.getElementById("sideImage");
+
+  function easeOutCubic(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  let progress = 0; // Controla el progreso de la animación
+  const startScale = 1.35;
+  const endScale = 1;
+  
+  title.style.transformOrigin = "left top";
+  title.style.transform = `scale(${startScale}) translateY(10px)`;
+  title.classList.remove("shrink");
+
+  // Usando GSAP Observer para controlar el progreso sin bloquear el scroll
+  gsap.registerPlugin(ScrollTrigger, Observer);
+
+  // Se crea un observer para el scroll
+  Observer.create({
+    target: window,
+    type: "wheel,touch",  // Detecta el scroll con la rueda o toque
+    onChange: (e) => {
+      // Avanza el progreso de la animación
+      const direction = e.deltaY > 0 ? "down" : "up";
+      if (direction === "down") {
+        progress += 0.04;
+        if (progress > 1) progress = 1;
+      } else if (direction === "up") {
+        progress -= 0.04;
+        if (progress < 0) progress = 0;
+      }
+
+      // Aplicar la animación suavizada con `easeOutCubic`
+      const eased = easeOutCubic(progress);
+      const currentScale = startScale + (endScale - startScale) * eased;
+      const currentTranslate = 10 * (1 - eased);
+
+      // Animación del título (escala y posición)
+      title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
+
+      // Animación de la imagen (escala sincronizada con el título) usando una animación de escala más controlada
+      gsap.to(sideImage, {
+        scale: 1 + (1 - eased) * 0.15,  // Escala de 1 a 1.15 dependiendo del progreso
+        duration: 0.5, // Duración controlada para una animación más fluida
+        ease: "power2.out"  // Una suavización más estándar para la escala
+      });
+
+      // Mostrar el texto cuando el progreso sea máximo
+      if (progress >= 1) {
+        title.classList.add("shrink");
+        sideText.classList.add("side-visible");
+        sideImage.classList.add("normal");
+      } else if (progress <= 0) {
+        title.classList.remove("shrink");
+        sideText.classList.remove("side-visible");
+        sideImage.classList.remove("normal");
+      }
+    },
+  });
+
+  // Usamos `ScrollTrigger` para las animaciones basadas en el scroll
+  gsap.from("#mainTitle", {
+    opacity: 0,
+    y: -100,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 75%",
+      end: "bottom top",
+      scrub: true,
+    },
+  });
+  gsap.from("#sideText", {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 75%",
+      end: "bottom top",
+      scrub: true,
+      onEnter: () => {
+        sideText.classList.add("side-visible");  // Añadir la clase cuando el texto entre
+      },
+      onLeaveBack: () => {
+        sideText.classList.remove("side-visible");  // Eliminar la clase cuando el texto se vaya al hacer scroll hacia arriba
+      },
+    },
+  });
+
+  gsap.from("#sideImage", {
+    opacity: 0,
+    scale: 1.2,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 75%",
+      end: "bottom top",
+      scrub: true,
+    },
+  });
+
+  // --- Scroll con desplazamiento suave usando ScrollToPlugin ---
+  const scrollButton = document.getElementById("scrollButton");
+  if (scrollButton) {
+    scrollButton.addEventListener("click", () => {
+      gsap.to(window, {
+        scrollTo: "#about",  // Desplazar a la sección 'about'
+        duration: 1.5,  // Tiempo de animación
+        ease: "power2.inOut",  // Efecto de suavizado
+      });
+    });
+  }
+});

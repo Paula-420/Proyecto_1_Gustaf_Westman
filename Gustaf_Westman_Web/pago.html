@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proceso de pago</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Montserrat:wght@200;400;600;700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    >
+
+    <!-- Iconos -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- ESTILOS PARA LA ANIMACIÓN DE SCROLL -->
+    <style>
+        /* Estado inicial: oculto y ligeramente desplazado hacia abajo */
+        .product {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Cuando entra en el viewport */
+        .product.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+     <!-- HEADER -->
+    <header class="header">
+        <div class="header__logo">
+            <img src="imgs/icon_web.gif" alt="Gustaf Westman logo">
+        </div>
+
+        <nav class="header__nav">
+            <a href="Proyectos.html">Proyects</a>
+            <a href="Shop.html">Shop</a>
+            <a href="index.html">About</a>
+        </nav>
+
+       <div class="header__cart">
+    <a href="#cart" class="js-open-cart">
+        <img src="imgs/carrito de compra.png" alt="Carrito">
+        <span id="cart-count" class="cart-count">0</span>
+    </a>
+    </div>
+
+    </header>
+ <!-- CHECKOUT / PAGO -->
+<section id="checkout" class="checkout container my-5">
+    <div class="checkout-back">
+        <a href="Shop.html">Regresar al catálogo</a>
+    </div>
+
+    <h2>Datos de pago</h2>
+    <p class="text-muted">Rellena tus datos para finalizar la compra.</p>
+
+
+    <form id="checkout-form" class="row g-3">
+        <!-- Datos personales -->
+        <div class="col-md-6">
+            <label for="fullName" class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" id="fullName" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" required>
+        </div>
+
+        <!-- Dirección -->
+        <div class="col-12">
+            <label for="address" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="address" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="city" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="city" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="zip" class="form-label">Código postal</label>
+            <input type="text" class="form-control" id="zip" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="country" class="form-label">País</label>
+            <input type="text" class="form-control" id="country" value="España" required>
+        </div>
+
+        <!-- Datos de tarjeta (demo) -->
+        <div class="col-md-6">
+            <label for="cardNumber" class="form-label">Número de tarjeta</label>
+            <input type="text" class="form-control" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="cardExpiry" class="form-label">Caducidad</label>
+            <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA" required>
+        </div>
+
+        <div class="col-md-3">
+            <label for="cardCvv" class="form-label">CVV</label>
+            <input type="password" class="form-control" id="cardCvv" maxlength="4" required>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-success w-100">
+                Confirmar pedido
+            </button>
+        </div>
+    </form>
+</section>  
+</body>
+  <!-- FOOTER COMPLETO -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <!-- Columna 1: Marca -->
+            <div class="footer__brand">
+                <img src="imgs/icon_web.gif" alt="Logo Gustaf Westman">
+                <p class="footer__brand-name">Gustaf Westman Studio</p>
+                <p class="footer__brand-text">
+                    Mugs, chunky glasses, mirrors & playful furniture.
+                </p>
+            </div>
+
+            <!-- Columna 2: Navegación del sitio -->
+            <div class="footer__column">
+                <h4 class="footer__title">Explore</h4>
+                <ul class="footer__list">
+                    <li><a href="Proyectos.html">Proyects</a></li>
+                    <li><a href="Shop.html">Shop</a></li>
+                    <li><a href="index.html">About</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Contacto -->
+            <div class="footer__column">
+                <h4 class="footer__title">Contact</h4>
+                <ul class="footer__list">
+                    <li><a href="mailto:hello@gustafwestman.com">hello@gustafwestman.com</a></li>
+                    <li>Stockholm, Sweden</li>
+                    <li><a href="#contact">Customer Service</a></li>
+                </ul>
+
+                <h4 class="footer__title footer__title--margin">Follow</h4>
+                <ul class="footer__list footer__social">
+                    <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="#" target="_blank" rel="noopener noreferrer">Pinterest</a></li>
+                    <li><a href="#" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 4: Newsletter (con bootstrap) -->
+            <div class="footer__column footer__newsletter">
+                <h4 class="footer__title">Newsletter</h4>
+                <p class="footer__text">
+                    Suscríbete para recibir noticias sobre nuevos productos, colaboraciones
+                    y drops exclusivos.
+                </p>
+
+                <form class="row g-2" action="#" method="post">
+                    <div class="col-12 col-md-8">
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            placeholder="Tu email"
+                            required
+                        >
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <button type="submit" class="btn btn-dark w-100">
+                            Suscribirme
+                        </button>
+                    </div>
+                </form>
+
+                <small class="footer__note">
+                    Al suscribirte aceptas nuestra <a href="#">política de privacidad</a>.
+                </small>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <p>© 2025 Gustaf Westman. All rights reserved.</p>
+            <div class="footer__legal">
+                <a href="#">Privacy Policy</a>
+                <span>·</span>
+                <a href="#">Terms & Conditions</a>
+                <span>·</span>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+<!-- SCRIPT PARA LA ANIMACIÓN DE SCROLL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const products = document.querySelectorAll('.product');
+
+            
+            if ('IntersectionObserver' in window) {
+                const options = {
+                    threshold: 0.2 
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, options);
+
+                products.forEach(product => observer.observe(product));
+            } else {
+                const onScroll = () => {
+                    const triggerBottom = window.innerHeight * 0.8;
+
+                    products.forEach(product => {
+                        const rect = product.getBoundingClientRect();
+                        if (rect.top < triggerBottom) {
+                            product.classList.add('is-visible');
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', onScroll);
+                onScroll(); 
+            }
+        });
+    </script>
+
+</html>
