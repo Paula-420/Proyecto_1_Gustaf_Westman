@@ -337,7 +337,7 @@ $(document).ready(function () {
     $(".btn-reset-8").on("click", function () {
         gsap.set(".box8a, .box8b, .box8c, .box8d", { x: 0 });
     });
-}); // Fin document.ready
+; // Fin document.ready
 
 ------------------------------------------------------------------------------------------------------------------
 
@@ -503,181 +503,157 @@ button:active {
 
 
 
-Carrito #1: 
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Elementos del DOM
-    const cartCountEl = document.getElementById('cart-count');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalEl = document.getElementById('cart-total');
-    const cartEmptyEl = document.getElementById('cart-empty');
-    const goToCheckoutBtn = document.getElementById('go-to-checkout');
-    const checkoutForm = document.getElementById('checkout-form');
 
-    // Estado del carrito
-    let cart = [];
 
-    // Añadir listeners a los botones "add to cart"
-    const productElements = document.querySelectorAll('.product');
-    productElements.forEach(productEl => {
-        const addBtn = productEl.querySelector('.add-cart');
-        if (!addBtn) return;
 
-        addBtn.addEventListener('click', () => {
-            const id = productEl.dataset.id;
-            const name = productEl.dataset.name;
-            const price = parseFloat(productEl.dataset.price);
-            const img = productEl.dataset.img;
+ACTUALIZACIONES
 
-            addToCart({ id, name, price, img });
-        });
-    });
+<section id="about" class="about-section py-5">
+  <div class="container">
+    <!-- TÍTULO ANIMADO -->
+    <div class="row">
+      <div class="col-lg-10">
+        <!-- CONTENEDOR DEL TÍTULO PARA ANIMARLO -->
+        <div id="mainTitleContainer">
+          <h2 id="mainTitle"
+              style="color:#2e3ea8; line-height:1.3;">
+            Forma y funcion
+          </h2>
+        </div>
+      </div>
+    </div>
 
-    function addToCart(product) {
-        const existing = cart.find(item => item.id === product.id);
-        if (existing) {
-            existing.quantity += 1;
-        } else {
-            cart.push({
-                ...product,
-                quantity: 1
-            });
-        }
-        updateCartUI();
+    <!-- FILA IMAGEN + TEXTO DERECHA (CONTINUAMOS CON LA ANIMACIÓN) -->
+    <div class="row mt-4 align-items-start gx-5" style="min-height: 350px;">
+      <!-- IMAGEN -->
+      <div class="col-lg-6 text-center">
+        <img id="sideImage" 
+             src="images-about/GUSTAF-FONDO-AZUL.jpg" 
+             class="img-fluid" alt=""
+             style="max-width:100%;">
+      </div>
+
+      <!-- TEXTO DERECHO -->
+      <div id="sideText" class="col-lg-5 mt-4 mt-lg-0 side-hidden">
+        <p style="font-size: 1rem; color:#2e3ea8; line-height:1.5;">
+          The namesake label presents objects including made-to-order furniture,
+          custom design pieces, ceramics and glassware.
+        </p>
+        <p class="mt-3" style="font-size: 1rem; color:#2e3ea8; line-height:1.5;">
+          Each made-to-order piece is crafted in collaboration with selected
+          Swedish woodworkers to support a local and sustainable production
+          process.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const title = document.getElementById("mainTitle");
+  const sideText = document.getElementById("sideText");
+
+  function easeOutCubic(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  let progress = 0;
+  const startScale = 1.35;
+  const endScale = 1;
+  let locked = true;
+  let lastScrollY = 0;
+
+  title.style.transformOrigin = "left top";
+  title.style.transform = `scale(${startScale}) translateY(10px)`;
+  title.classList.remove("shrink");
+
+  /* ----------------------------------------------
+        SCROLL HACIA ABAJO → reducir título
+  ---------------------------------------------- */
+  window.addEventListener("wheel", (e) => {
+    const direction = e.deltaY > 0 ? "down" : "up";
+
+    if (locked) {
+      e.preventDefault();
+
+      if (direction === "down") {
+        progress += e.deltaY * 0.0022;
+        if (progress > 1) progress = 1;
+      }
+
+      const eased = easeOutCubic(progress);
+
+      const currentScale  = startScale + (endScale - startScale) * eased;
+      const currentTranslate = 10 * (1 - eased);
+
+      title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
+
+      // CUANDO ACABA LA ANIMACIÓN DEL TÍTULO → mostrar texto
+      if (progress >= 1) {
+    locked = false;
+    title.classList.add("shrink");
+    sideText.classList.add("side-visible");
+
+    // La imagen vuelve a tamaño normal
+    document.getElementById("sideImage").classList.add("normal");
+}
     }
 
-    function removeFromCart(id) {
-        cart = cart.filter(item => item.id !== id);
-        updateCartUI();
+    /* ----------------------------------------------
+        SCROLL HACIA ARRIBA → volver a grande
+    ---------------------------------------------- */
+    if (!locked && direction === "up" && window.scrollY <= 5) {
+      locked = true;
+      progress = 0;
+
+      title.classList.remove("shrink");
+      title.style.transition = "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+      title.style.transform = `scale(${startScale}) translateY(10px)`;
+
+      // OCULTAR TEXTO CUANDO EL TÍTULO SE AGRANDA
+      sideText.classList.remove("side-visible");
+
+      setTimeout(() => { title.style.transition = ""; }, 600);
     }
 
-    function changeQuantity(id, delta) {
-        const item = cart.find(i => i.id === id);
-        if (!item) return;
+  }, { passive: false });
 
-        item.quantity += delta;
-        if (item.quantity <= 0) {
-            // eliminar si llega a 0
-            cart = cart.filter(i => i.id !== id);
-        }
-        updateCartUI();
+
+  /* Backup por scroll táctil o teclado */
+  window.addEventListener("scroll", () => {
+    const direction = window.scrollY > lastScrollY ? "down" : "up";
+    lastScrollY = window.scrollY;
+
+    if (direction === "up" && window.scrollY <= 5) {
+      locked = true;
+      progress = 0;
+      title.classList.remove("shrink");
+
+      title.style.transition = "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+      title.style.transform = `scale(${startScale}) translateY(10px)`;
+
+      // Ocultar texto derecho cuando volvemos arriba
+      sideText.classList.remove("side-visible");
+      document.getElementById("sideImage").classList.remove("normal");
+
+      setTimeout(() => { title.style.transition = ""; }, 600);
     }
+  });
 
-    function calcTotal() {
-        return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    }
-
-    function formatCurrency(value) {
-        // Formato europeo con coma y € al final
-        return value.toLocaleString('es-ES', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }) + ' €';
-    }
-
-    function updateCartUI() {
-        // Actualizar numerito del header
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCountEl.textContent = totalItems;
-
-        // Carrito vacío
-        if (cart.length === 0) {
-            cartEmptyEl.style.display = 'block';
-            cartItemsContainer.innerHTML = '';
-            cartTotalEl.textContent = '0,00 €';
-            goToCheckoutBtn.disabled = true;
-            return;
-        } else {
-            cartEmptyEl.style.display = 'none';
-            goToCheckoutBtn.disabled = false;
-        }
-
-        // Pintar items del carrito
-        cartItemsContainer.innerHTML = '';
-
-        cart.forEach(item => {
-            const row = document.createElement('div');
-            row.classList.add('cart-item', 'd-flex', 'align-items-center', 'justify-content-between', 'border-bottom', 'py-2');
-
-            row.innerHTML = `
-                <div class="d-flex align-items-center">
-                    <img src="${item.img}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-right: 10px;">
-                    <div>
-                        <div class="fw-semibold">${item.name}</div>
-                        <div class="text-muted small">${formatCurrency(item.price)}</div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <button class="btn btn-sm btn-outline-secondary me-2 btn-qty" data-id="${item.id}" data-action="decrease">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="btn btn-sm btn-outline-secondary ms-2 btn-qty" data-id="${item.id}" data-action="increase">+</button>
-                    <button class="btn btn-sm btn-outline-danger ms-3 btn-remove" data-id="${item.id}">×</button>
-                </div>
-            `;
-
-            cartItemsContainer.appendChild(row);
-        });
-
-        // Total
-        const total = calcTotal();
-        cartTotalEl.textContent = formatCurrency(total);
-    }
-
-    // Delegación de eventos para +, -, eliminar
-    if (cartItemsContainer) {
-        cartItemsContainer.addEventListener('click', (e) => {
-            const btn = e.target;
-
-            if (btn.classList.contains('btn-qty')) {
-                const id = btn.dataset.id;
-                const action = btn.dataset.action;
-                if (action === 'increase') {
-                    changeQuantity(id, 1);
-                } else if (action === 'decrease') {
-                    changeQuantity(id, -1);
-                }
-            }
-
-            if (btn.classList.contains('btn-remove')) {
-                const id = btn.dataset.id;
-                removeFromCart(id);
-            }
-        });
-    }
-
-    // Botón "Ir al pago" que hace scroll a la sección de checkout
-    if (goToCheckoutBtn) {
-        goToCheckoutBtn.addEventListener('click', () => {
-            const checkoutSection = document.getElementById('checkout');
-            if (!checkoutSection) return;
-            checkoutSection.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    // Envío del formulario de pago (DEMO)
-    if (checkoutForm) {
-        checkoutForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío. Añade productos antes de pagar.');
-                return;
-            }
-
-            // Podrías añadir más validaciones aquí si quieres
-            alert('¡Gracias por tu compra!');
-
-            // Limpiar carrito y formulario
-            cart = [];
-            updateCartUI();
-            checkoutForm.reset();
-
-            // Scroll arriba del todo
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // Inicializar UI
-    updateCartUI();
 });
+/* --- TÍTULO PRINCIPAL: Animación grande → pequeño con scroll --- */
+.animated-title {
+  opacity: 1; /* Título visible desde el inicio */
+  transform: scale(1.35) translateY(10px); /* Escala más grande inicialmente */
+  transform-origin: left top;
+  transition: transform 0.5s ease, opacity 1s ease;
+  font-size: 3rem; /* Título grande al principio */
+  max-width: 900px;
+  line-height: 1.3; /* Mantén el line-height original */
+  padding-bottom: 4rem; /* Añadimos espacio extra cuando el texto está grande */
+}
 
+/* Cuando el título se hace pequeño */
+.animated-title.shrink 
