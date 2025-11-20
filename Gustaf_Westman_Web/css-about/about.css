@@ -1,0 +1,488 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     font-family: "Plus Jakarta Sans", sans-serif;
+}
+.plus-jakarta-sans {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+#about {
+  background-color: #2e3ea8;
+}
+.animated-title {
+  opacity: 1; /* Título visible desde el inicio */
+  transform: scale(1.35) translateY(10px); /* Escala más grande inicialmente */
+  transform-origin: left top;
+  transition: transform 0.5s ease, opacity 1s ease;
+  font-size: 3rem; /* Título grande al principio */
+  max-width: 900px;
+  line-height: 1.3; /* Mantén el line-height original */
+  padding-bottom: 4rem; /* Añadimos espacio extra cuando el texto está grande */
+  
+}
+
+/* Cuando el título se hace pequeño */
+.animated-title.shrink {
+  transform: scale(1) translateY(0);
+  font-size: 2.4rem; /* Tamaño pequeño al final */
+  line-height: 1.3; /* Mantén el line-height */
+  padding-bottom: 2rem; /* Menos espacio cuando el texto está pequeño */
+}
+
+/* --- RESTO DEL CÓDIGO --- */
+
+/* Animación del título y la imagen */
+/* Animación del título con mayor velocidad */
+/* --- TÍTULO --- */
+#mainTitle {
+  transform-origin: left top;
+  transition: transform 0.5s ease-out, opacity 0.6s ease-out; /* Aumentamos la visibilidad de la transición */
+  font-size: 3rem;
+  max-width: 900px;
+  line-height: 1.3;
+  padding-bottom: 4rem;
+}
+
+/* --- TEXTO --- */
+.side-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.side-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- IMAGEN --- */
+#sideImage {
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Asegura que la imagen tenga una animación suave */
+  transform: scale(1.15);
+  transform-origin: left;
+}
+
+#sideImage.normal {
+  transform: scale(1);
+}
+
+#mainTitle.shrink {
+  transform: scale(1) translateY(0);
+  font-size: 2.4rem;
+  line-height: 1.3;
+  padding-bottom: 1rem;
+}
+
+
+/* --- TYPEWRITER PARA LOS TEXTOS DERECHA */
+.typewriter-block {
+  font-size: 1rem;
+  color: #2e3ea8;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #2e3ea8;
+  width: 0;
+  display: inline-block;
+  opacity: 0;
+  animation: cursorBlink 0.7s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { border-color: transparent; }
+  51%, 100% { border-color: #2e3ea8; }
+}
+
+/* Estilo adicional para la nueva colección */
+.new-collection-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #D32F2F; /* Color para "Nueva colección" */
+  letter-spacing: 3px;
+}
+
+.row {
+  padding: 2rem;
+}
+
+button.btn-danger {
+  background-color: #D32F2F;
+  border-color: #D32F2F;
+  color: white;
+  margin-top: 20px;
+}
+
+button.btn-danger:hover {
+  background-color: #C2185B;
+  border-color: #C2185B;
+}
+
+/* Estilo para las tarjetas dentro de la nueva colección */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* --- MEDIA QUERIES --- */
+
+/* Para dispositivos móviles y pantallas pequeñas */
+@media (max-width: 768px) {
+  .animated-title {
+    font-size: 2rem;  /* Título más pequeño en móviles */
+    line-height: 1.3; 
+    padding-bottom: 2rem; /* Reducimos el padding en pantallas pequeñas */
+  }
+
+  #sideImage {
+    transform: scale(1.05); /* Imagen ligeramente más pequeña para pantallas pequeñas */
+  }
+
+  #sideText {
+    font-size: 0.9rem; /* Reducimos el tamaño del texto en pantallas pequeñas */
+  }
+
+  /* En dispositivos móviles, la imagen y el texto se apilan */
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Ajustamos el espaciado entre los elementos */
+  .col-lg-6, .col-lg-4 {
+    margin-bottom: 20px;
+  }
+
+  .side-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .side-hidden {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  #sideText {
+    font-size: 1rem;
+    padding: 0;
+    margin-top: 20px;
+  }
+}
+
+/* Para tabletas y dispositivos con pantallas medianas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .animated-title {
+    font-size: 2.4rem;  /* Ajustamos el tamaño del título para tabletas */
+  }
+
+  #sideImage {
+    transform: scale(1.1); /* Imagen un poco más grande para tabletas */
+  }
+}
+
+
+/* Media query para pantallas grandes (por ejemplo, escritorios) */
+@media (min-width: 1025px) {
+  #mainTitle {
+    font-size: 3.5rem; /* Aumentar el tamaño del texto para pantallas grandes */
+    padding-bottom: 4rem;
+  }
+}
+
+/* Media query para tabletas (pantallas medianas) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #mainTitle {
+    font-size: 2.5rem; /* Ajustar el tamaño del texto para pantallas medianas */
+    padding-bottom: 3rem;
+  }
+}
+
+/* Media query para dispositivos móviles (pantallas pequeñas) */
+@media (max-width: 767px) {
+  #mainTitle {
+    font-size: 1.8rem; /* Reducir el tamaño del texto en dispositivos móviles */
+    padding-bottom: 2rem;
+    text-align: left; /* Alinear el texto a la izquierda en pantallas pequeñas */
+  }
+}
+
+/* Ajustes adicionales para móviles muy pequeños */
+@media (max-width: 480px) {
+  #mainTitle {
+    font-size: 1.5rem; /* Reducir aún más el tamaño en móviles muy pequeños */
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Nueva colección */
+.new-collection .img-hover-zoom img {
+    transition: transform 0.5s ease;
+}
+
+.new-collection .img-hover-zoom:hover img {
+    transform: scale(1.08);
+}
+/* Contenedor principal de la barra de desplazamiento */
+/* Contenedor principal de la barra de desplazamiento */
+
+.scrolling-text {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-just-black);
+}
+.scrolling-text .rail {
+  display: flex;
+}
+.scrolling-text .rail h4 {
+  white-space: nowrap;
+  font-size: 100px;
+  font-weight: 900;
+  letter-spacing: ls(120);
+  line-height: 1em;
+  margin: 0 30px 0 0;
+  color: var(--color-surface-white);
+}
+
+
+/* Animación del desplazamiento del texto */
+
+/* HTML: <div class="loader"></div> */
+
+
+/* PROJECTOS */
+
+/* Contenedor de las secciones de slide */
+@font-face {
+  font-family: "Bandeins Sans & Strange Variable";
+  src: url("https://res.cloudinary.com/dldmpwpcp/raw/upload/v1566406079/BandeinsStrangeVariable_esetvq.ttf");
+}
+@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+
+/* * {
+  box-sizing: border-box;
+  user-select: none;
+}
+ */
+
+
+/* html,
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  height: -webkit-fill-available;
+}
+
+body {
+  color: #fff;
+  background: #4361ee;
+  font-family: "Sora", sans-serif;
+}
+
+footer {
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  width: 100%;
+  height: 7em;
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.2rem, 2vw, 1rem);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+ */
+/* Sección Projects */
+.projects {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  visibility: visible;
+}
+
+.projects__outer,
+.projects__inner {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.projects__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.projects__container {
+  position: relative;
+  max-width: 1400px;
+  width: 100vw;
+  margin: 0 auto;
+  height: 90vh;
+  margin-bottom: 10vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 0 1rem;
+}
+
+.projects__heading {
+  --width: 200;
+  display: block;
+  text-align: left;
+  font-family: "Bandeins Sans & Strange Variable";
+  font-size: clamp(5rem, 15vw, 15rem);
+  font-weight: 900;
+  font-variation-settings: "wdth" var(--width);
+  margin: 0;
+  padding: 0;
+  color: #f2f1fc;
+  z-index: 999;
+  mix-blend-mode: difference;
+  grid-area: 2 / 2 / 3 / 10;
+  align-self: end;
+}
+
+.projects__img-cont {
+  margin-top: 4rem;
+  grid-area: 2 / 1 / 7 / 8;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.projects__outer {
+  /* Añadimos visibilidad para que los slides sean visibles */
+  visibility: visible;
+}
+
+.projects__inner {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+/* Estilos para los tres proyectos */
+.projects:nth-child(1) .projects__inner {
+  visibility: visible;
+}
+
+.projects:nth-child(2) .projects__inner {
+  background-color: #355070;
+}
+
+.projects:nth-child(3) .projects__inner {
+  background-color: #b56576;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.overlay__content {
+  max-width: 1400px;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 90vh;
+  margin-bottom: 10vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.overlay__img-cont {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  grid-area: 4 / 3 / 9 / 11;
+
+.img-proyects {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+}
+
+.overlay__count {
+  grid-area: 3 / 10 / 4 / 10;
+  font-size: clamp(3rem, 4vw, 15rem);
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  border-bottom: 7px white solid;
+}
+
+@media screen and (min-width: 900px) {
+  .overlay__content,
+  .projects__container {
+    padding: 0 3rem;
+    margin-top: 10vh;
+    height: 80vh;
+  }
+
+  .overlay__img-cont {
+    grid-area: 5 / 4 / 10 / 11;
+  }
+
+  .overlay__count {
+    grid-area: 3 / 10 / 4 / 11;
+  }
+
+  .projects__img-cont {
+    margin-top: 0;
+    grid-area: 3 / 2 / 8 / 7;
+  }
+
+  .projects__heading {
+    grid-area: 1 / 1 / 4 / 10;
+  }
+}
