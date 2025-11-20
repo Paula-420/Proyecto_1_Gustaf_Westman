@@ -41,6 +41,42 @@
             transform: translateY(0);
         }
     </style>
+      <style>
+    /* ===== CSS DEL PEN ===== */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #fff;
+      overflow: hidden; /* Opcional: para que no se vea scroll */
+    }
+
+    .Hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .heading-xl {
+      font-size: clamp(2.5rem, 13vw, 13rem);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .Hero__image {
+      position: fixed;
+      opacity: 0;
+      width: 120px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      pointer-events: none; /* para que no “bloquee” el cursor */
+    }
+
+    .Hero__text {
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -62,30 +98,129 @@
         <span id="cart-count" class="cart-count">0</span>
     </a>
     </div>
-    </header>
     
-<section class="Hero">
-  <div class="container">
-    <h1 class="Hero__text heading-xl">Proyects</h1>
+    </header>
 
-    <div class="Hero__images">
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-1.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-2.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-3.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-4.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-5.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-6.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-7.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-8.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-9.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-10.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-11.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-12.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-13.jpg" alt="" />
-      <img class="Hero__image" src="https://assets.codepen.io/16327/portrait-image-14.jpg" alt="" />
+    <!-- ===== HTML DEL PEN ===== -->
+  <section class="Hero">
+    <div class="container">
+      <h1 class="Hero__text heading-xl">Projects</h1>
+
+      <div class="Hero__images">
+        <img class="Hero__image" src="imgs-paula/projects-1.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-10.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-11.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-2.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-12.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-3.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-14.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-5.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-13.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-9.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-7.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-6.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-8.jpg" alt="" />
+        <img class="Hero__image" src="imgs-paula/projects-4.jpg" alt="" />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+
+  <!-- ===== TU JS (EL DEL PEN) ===== -->
+  <script>
+    function playAnimation(img) {
+      let tl = gsap.timeline();
+
+      tl.from(
+        img,
+        {
+          scale: 0.8,
+          duration: 2
+        },
+        "<"
+      ).to(
+        img,
+        {
+          y: "120vh",
+          rotation: "random([360, -360])",
+          ease: "back.in(.4)",
+          duration: 1,
+          filter: "blur(5px)"
+        },
+        0
+      );
+    }
+
+    /* --------------------------------
+       El otro código del efecto
+       ------------------------------------*/
+    let images = gsap.utils.toArray(".Hero__image");
+    let gap = 200; // distancia mínima que tiene que recorrer el ratón para mostrar otra imagen
+    let index = 0;
+    let wrapper = gsap.utils.wrap(0, images.length);
+    gsap.defaults({ duration: 1 });
+
+    let mousePos = { x: 0, y: 0 };
+    let lastMousePos = mousePos;
+    let cachedMousePos = mousePos;
+
+    window.addEventListener("mousemove", (e) => {
+      mousePos = {
+        x: e.x,
+        y: e.y
+      };
+    });
+
+    gsap.ticker.add(ImageTrail);
+
+    function ImageTrail() {
+      let travelDistance = Math.hypot(
+        lastMousePos.x - mousePos.x,
+        lastMousePos.y - mousePos.y
+      );
+
+      // “suaviza” la posición anterior
+      cachedMousePos.x = gsap.utils.interpolate(
+        cachedMousePos.x || mousePos.x,
+        mousePos.x,
+        0.1
+      );
+      cachedMousePos.y = gsap.utils.interpolate(
+        cachedMousePos.y || mousePos.y,
+        mousePos.y,
+        0.1
+      );
+
+      if (travelDistance > gap) {
+        animateImage();
+        lastMousePos = mousePos;
+      }
+    }
+
+    function animateImage() {
+      let wrappedIndex = wrapper(index);
+
+      let img = images[wrappedIndex];
+      gsap.killTweensOf(img);
+
+      gsap.set(img, {
+        clearProps: "all"
+      });
+
+      gsap.set(img, {
+        opacity: 1,
+        left: mousePos.x,
+        top: mousePos.y,
+        xPercent: -50,
+        yPercent: -50
+      });
+
+      playAnimation(img);
+
+      index++;
+    }
+  </script>
 
 <!-- CARRITO (copiado desde shop.html) -->
 <section id="cart" class="cart container my-5">
@@ -220,11 +355,10 @@
     </div>
   </div>
 </div>
-
+ <!-- GSAP JS -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
  <!-- JS -->
     <script src="js-paula/script.js"></script>
-
-
 
 
 <button id="scrollToTopBtn" 

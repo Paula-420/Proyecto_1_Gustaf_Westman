@@ -134,8 +134,6 @@ function initCartAndSlideUp() {
       const img   = productEl.dataset.img;
 
       addToCart({ id, name, price, img });
-      // Si quieres, puedes abrir el carrito automáticamente:
-      // if (cartSection) cartSection.classList.add('cart--open');
     });
   });
 
@@ -177,7 +175,6 @@ function initCartAndSlideUp() {
   }
 
   function updateCartUI() {
-    // 👉 Guardar SIEMPRE el carrito actual en localStorage
     saveCartToStorage(cart);
 
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
