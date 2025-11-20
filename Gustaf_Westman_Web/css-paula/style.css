@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+
+.plus-jakarta-sans {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 /* TIPOGRAFÍA GLOBAL */
 body {
     font-family: "Montserrat", sans-serif;
@@ -33,8 +40,8 @@ img {
 }
 
 .header__logo img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
@@ -44,7 +51,7 @@ img {
 }
 
 .header__nav a {
-    font-size: 15px;
+    font-size: 1rem;
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
     color: #000;
@@ -91,7 +98,7 @@ img {
     position: absolute;
     top: -5px;
     right: -5px;
-    background: #000;
+    background: #dc3545;
     color: #fff;
     font-size: 12px;
     border-radius: 50%;
@@ -136,8 +143,9 @@ img {
 }
 
 .catalog-title {
-    font-family: "Balsamiq Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 7rem;
+    font-weight: bold;
     margin: 0;
     line-height: 160px;
     letter-spacing: 7px;
@@ -148,7 +156,7 @@ img {
     right: 120px;
     top: 70px;
     font-family: "Montserrat", sans-serif;
-    font-size: 38px;
+    font-size: 2rem;
     color: #f59046;
     text-align: right;
     line-height: 40px;
@@ -228,7 +236,7 @@ img {
 }
 
 .add-cart:hover {
-    color: #ff4f8b;
+    color: #1b2fac;
     transform: scale(1.1);
 }
 
@@ -419,6 +427,7 @@ img {
     visibility: hidden !important;
 }
 
+
 /* Animación tipo pulse */
 @keyframes pulse {
     0%   { transform: scale(1); }
@@ -429,6 +438,18 @@ img {
 .pulse-animation {
     animation: pulse 0.7s ease-in-out;
 }
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 /* ==========================================================
@@ -567,3 +588,4 @@ html {
     color: #ffe7ba;
     opacity: 1;
 }
+
