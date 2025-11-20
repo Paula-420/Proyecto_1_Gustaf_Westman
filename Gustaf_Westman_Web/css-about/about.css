@@ -322,7 +322,7 @@ button.btn-danger:hover {
   --width: 200;
   display: block;
   text-align: left; /* Alinea el texto en el centro */
-  font-size: clamp(4rem, 14vw, 14rem);
+  font-size: 8rem;
   
   font-variation-settings: "wdth" var(--width);
   font-family: "Plus Jakarta Sans", sans-serif;

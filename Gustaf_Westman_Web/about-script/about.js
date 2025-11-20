@@ -177,4 +177,3 @@ function initAnimations() {
   // Ahora activa la animación de entrada para la primera slide
   gotoSection(0, 1); // Esto asegurará que la primera slide ya esté visible
 }
-
