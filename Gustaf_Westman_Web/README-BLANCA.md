@@ -1129,104 +1129,207 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-});
+});ç
 
-NUEVO ACTUAL
-gsap.registerPlugin(ScrollTrigger, TextPlugin);
-document.addEventListener("DOMContentLoaded", () => {
-  const title = document.getElementById("mainTitle");
-  const sideText = document.getElementById("sideText");
-  const sideImage = document.getElementById("sideImage");
+@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+@font-face {
+  font-family: "Bandeins Sans & Strange Variable";
+  src: url("https://res.cloudinary.com/dldmpwpcp/raw/upload/v1566406079/BandeinsStrangeVariable_esetvq.ttf");
+}
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
 
-  function easeOutCubic(x) {
-    return 1 - Math.pow(1 - x, 3);
+::-webkit-scrollbar {
+  display: none;
+}
+
+figure {
+  margin: 0;
+  overflow: hidden;
+}
+
+html,
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  height: -webkit-fill-available;
+}
+
+body {
+  color: #fff;
+  background: #4361ee;
+  font-family: "Sora", sans-serif;
+}
+
+footer {
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  width: 100%;
+  height: 7em;
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.2rem, 2vw, 1rem);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.slide {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  visibility: hidden;
+}
+.slide__outer, .slide__inner {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+.slide__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+.slide__container {
+  position: relative;
+  max-width: 1400px;
+  width: 100vw;
+  margin: 0 auto;
+  height: 90vh;
+  margin-bottom: 10vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 0 1rem;
+}
+.slide__heading {
+  --width: 200;
+  display: block;
+  text-align: left;
+  font-family: "Bandeins Sans & Strange Variable";
+  font-size: clamp(5rem, 15vw, 15rem);
+  font-weight: 900;
+  font-variation-settings: "wdth" var(--width);
+  margin: 0;
+  padding: 0;
+  color: #f2f1fc;
+  z-index: 999;
+  mix-blend-mode: difference;
+  grid-area: 2/2/3/10;
+  align-self: end;
+}
+.slide__img-cont {
+  margin-top: 4rem;
+  grid-area: 2/1/7/8;
+}
+.slide__img-cont img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide:nth-of-type(1) {
+  visibility: visible;
+}
+.slide:nth-of-type(1) .slide__content {
+  background-color: #6d597a;
+}
+
+.slide:nth-of-type(2) .slide__content {
+  background-color: #355070;
+}
+
+.slide:nth-of-type(3) .slide__content {
+  background-color: #b56576;
+}
+
+.slide:nth-of-type(4) .slide__content {
+  background-color: #9a8c98;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.overlay__content {
+  max-width: 1400px;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 90vh;
+  margin-bottom: 10vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.overlay__img-cont {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  grid-area: 4/3/9/11;
+}
+.overlay__img-cont img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.overlay__count {
+  grid-area: 3/10/4/10;
+  font-size: clamp(3rem, 4vw, 15rem);
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  border-bottom: 7px white solid;
+}
+
+@media screen and (min-width: 900px) {
+  .overlay__content,
+.slide__container {
+    padding: 0 3rem;
+    margin-top: 10vh;
+    height: 80vh;
   }
 
-  let progress = 0; // Controla el progreso de la animación
-  const startScale = 1.35;
-  const endScale = 1;
-  let locked = true; // Bloquea el scroll hasta que la animación termine
-  let lastScrollY = 0; // Para controlar el scroll hacia arriba/abajo
+  .overlay__img-cont {
+    grid-area: 5/4/10/11;
+  }
 
-  title.style.transformOrigin = "left top";
-  title.style.transform = `scale(${startScale}) translateY(10px)`;
-  title.classList.remove("shrink");
+  .overlay__count {
+    grid-area: 3/10/4/11;
+  }
 
-  // --- SCROLL CON LA ROLLA Y LA BARRA LATERAL ---
-  window.addEventListener("wheel", (e) => {
-    const direction = e.deltaY > 0 ? "down" : "up";
-    if (locked) {
-      e.preventDefault(); // Evitar el desplazamiento por defecto (sólo para la animación)
+  .slide__img-cont {
+    margin-top: 0;
+    grid-area: 3/2/8/7;
+  }
 
-      if (direction === "down") {
-        progress += e.deltaY * 0.04; // Incremento mayor para mayor velocidad
-        if (progress > 1) progress = 1; // Limitar el progreso a 1 (máximo)
-      } else if (direction === "up") {
-        progress -= e.deltaY * 0.04; // Reducir el progreso para el scroll hacia arriba
-        if (progress < 0) progress = 0; // Limitar el progreso a 0 (mínimo)
-      }
+  .slide__heading {
+    grid-area: 1/1/4/10;
+  }
+}
 
-      const eased = easeOutCubic(progress);
-      const currentScale = startScale + (endScale - startScale) * eased;
-      const currentTranslate = 10 * (1 - eased);
-
-      // Animación del título (escala y posición)
-      title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
-
-      // Animación de la imagen (escala sincronizada con el título)
-      sideImage.style.transform = `scale(${1 + (1 - eased) * 0.15})`;
-
-      // Mostrar el texto cuando el progreso sea máximo
-      if (progress >= 1) {
-        locked = false; // Liberar el scroll
-        title.classList.add("shrink"); // Reducir el tamaño del título
-        sideText.classList.add("side-visible"); // Hacer visible el texto
-        sideImage.classList.add("normal"); // Normalizar la imagen
-      } else if (progress <= 0) {
-        locked = true; // Bloquear el scroll cuando el progreso esté en 0
-        title.classList.remove("shrink");
-        sideText.classList.remove("side-visible"); // Ocultar el texto
-        sideImage.classList.remove("normal"); // Restaurar la imagen a su tamaño original
-      }
-    }
-  }, { passive: false });
-
-  // --- SCROLL CON LA BARRA LATERAL ---
-  window.addEventListener("scroll", () => {
-    const direction = window.scrollY > lastScrollY ? "down" : "up";
-    lastScrollY = window.scrollY;
-
-    if (locked) {
-      if (direction === "down") {
-        progress += 0.04; // Aumentar el progreso de la animación
-        if (progress > 1) progress = 1;
-      } else if (direction === "up") {
-        progress -= 0.04; // Reducir el progreso de la animación
-        if (progress < 0) progress = 0;
-      }
-
-      const eased = easeOutCubic(progress);
-      const currentScale = startScale + (endScale - startScale) * eased;
-      const currentTranslate = 10 * (1 - eased);
-
-      // Animación del título
-      title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
-
-      // Animación sincronizada de la imagen
-      sideImage.style.transform = `scale(${1 + (1 - eased) * 0.15})`;
-
-      if (progress >= 1) {
-        locked = false;
-        title.classList.add("shrink");
-        sideText.classList.add("side-visible"); // Hacer visible el texto
-        sideImage.classList.add("normal");
-      }
-
-      if (progress <= 0) {
-        locked = true;
-        title.classList.remove("shrink");
-        sideText.classList.remove("side-visible"); // El texto desaparece
-        sideImage.classList.remove("normal"); // Restaurar la imagen a su tamaño original
-      }
-    }
-  });
