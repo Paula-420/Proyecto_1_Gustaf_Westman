@@ -29,6 +29,8 @@
 /* Cuando el título se hace pequeño */
 .animated-title.shrink {
   transform: scale(1) translateY(0);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-style: light;
   font-size: 2.4rem; /* Tamaño pequeño al final */
   line-height: 1.3; /* Mantén el line-height */
   padding-bottom: 2rem; /* Menos espacio cuando el texto está pequeño */
@@ -97,13 +99,7 @@
   51%, 100% { border-color: #2e3ea8; }
 }
 
-/* Estilo adicional para la nueva colección */
-.new-collection-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #D32F2F; /* Color para "Nueva colección" */
-  letter-spacing: 3px;
-}
+
 
 .row {
   padding: 2rem;
@@ -240,7 +236,17 @@ button.btn-danger:hover {
 }
 
 .new-collection .img-hover-zoom:hover img {
+
     transform: scale(1.08);
+}
+
+/* Estilo adicional para la nueva colección */
+.new-collection-title {
+  font-size: 2.5rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+   
+  color: #D32F2F; /* Color para "Nueva colección" */
+  letter-spacing: 3px;
 }
 /* Contenedor principal de la barra de desplazamiento */
 /* Contenedor principal de la barra de desplazamiento */
@@ -356,20 +362,18 @@ button.btn-danger:hover {
   visibility: visible;
 }
 .slide:nth-of-type(1) .slide__content {
-  background-color: #D1052D;
+ background-color: #97D6FB;
 }
 
 .slide:nth-of-type(2) .slide__content {
-  background-color: #FCCF40;
+   background-color: #D1052D;
 }
 
 .slide:nth-of-type(3) .slide__content {
   background-color: #27389F;
 }
 
-.slide:nth-of-type(4) .slide__content {
-  background-color: #97D6FB;
-}
+
 
 /* Estilo del overlay */
 .overlay {
@@ -453,3 +457,55 @@ button.btn-danger:hover {
   }
 }
 
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white; /* Fondo blanco */
+    color: black; /* Flecha en negro */
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    display: none; /* Inicialmente oculto */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Opcional, sombra para darle un toque de profundidad */
+}
+
+#scrollToTopBtn svg {
+    fill: none; /* Para asegurarse de que el fondo sea transparente */
+    stroke: black; /* Flecha en color negro */
+    width: 24px;
+    height: 24px;
+}
+
+
+/* Para dispositivos móviles (pantallas más pequeñas) */
+@media (max-width: 767px) {
+  /* Ajustar el tamaño del título principal para móviles */
+  #mainTitle {
+    font-size: 1rem; /* Reducido para móviles */
+    line-height: 1.4;
+    width: 80%;
+  }
+
+  /* Ajustar el tamaño de los títulos dentro de los slides para móviles */
+  .slide__heading {
+    font-size: 3rem; /* Reducido para móviles */
+    line-height: 1.3;
+  }
+}
+
+/* Para tabletas (pantallas medianas, 768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Ajustar el tamaño del título principal para tabletas */
+  #mainTitle {
+    font-size: 2rem; /* Reducido para tabletas */
+    line-height: 1.3;
+  }
+
+  /* Ajustar el tamaño de los títulos dentro de los slides para tabletas */
+  .slide__heading {
+    font-size: 5rem; /* Reducido para tabletas */
+    line-height: 1.3;
+  }
+}

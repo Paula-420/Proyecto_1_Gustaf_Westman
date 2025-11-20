@@ -177,3 +177,119 @@ function initAnimations() {
   // Ahora activa la animación de entrada para la primera slide
   gotoSection(0, 1); // Esto asegurará que la primera slide ya esté visible
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+    // Función para mostrar el botón cuando se hace scroll hacia abajo
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+            scrollToTopBtn.style.display = "block"; // Mostrar el botón si el usuario ha hecho scroll
+        } else {
+            scrollToTopBtn.style.display = "none"; // Ocultar el botón si el usuario está en la parte superior
+        }
+    });
+
+    // Función para manejar el clic en el botón para ir arriba
+    scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // Desplazamiento suave hacia arriba
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.getElementById("mainTitle");
+  const sideText = document.getElementById("sideText");
+  const sideImage = document.getElementById("sideImage");
+
+  const startScale = 1.35;
+  const endScale = 1;
+  let progress = 0;
+  let locked = false;  // Scroll no está bloqueado por defecto
+  let lastScrollY = 0;
+
+  title.style.transformOrigin = "left top";
+  title.style.transform = `scale(${startScale}) translateY(10px)`;
+
+  // Función para la animación de escala del título
+  function updateTitleTransform() {
+    const eased = easeOutCubic(progress);
+    const currentScale = startScale + (endScale - startScale) * eased;
+    const currentTranslate = 10 * (1 - eased);
+
+    title.style.transform = `scale(${currentScale}) translateY(${currentTranslate}px)`;
+
+    // Mostrar el texto cuando el título ha reducido completamente
+    if (progress >= 1) {
+      if (!locked) {
+        locked = true; // Bloquear scroll mientras el texto aparece
+        title.classList.add("shrink");
+        sideImage.classList.add("normal");
+
+        // Retrasar la aparición del texto
+        setTimeout(() => {
+          sideText.classList.add("side-visible");
+        }, 300); // Esperar 300ms antes de mostrar el texto (puedes ajustar este tiempo)
+      }
+    }
+  }
+
+  // Función para calcular el easing
+  function easeOutCubic(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  // Manejo de evento de scroll (ratón)
+  function onScroll(e) {
+    const direction = e.deltaY > 0 ? "down" : "up";
+
+    if (direction === "down" && !locked) {
+      progress += e.deltaY * 0.0022;
+      if (progress > 1) progress = 1;
+      updateTitleTransform();
+    }
+
+    // Scroll hacia arriba
+    if (direction === "up" && !locked && window.scrollY <= 5) {
+      resetTitleTransform();
+    }
+  }
+
+  // Resetear la animación del título
+  function resetTitleTransform() {
+    progress = 0;
+    locked = false; // Desbloquear el scroll
+
+    title.classList.remove("shrink");
+    title.style.transition = "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+    title.style.transform = `scale(${startScale}) translateY(10px)`;
+
+    sideText.classList.remove("side-visible");
+    sideImage.classList.remove("normal");
+
+    setTimeout(() => {
+      title.style.transition = "";
+    }, 600);
+  }
+
+  // Añadir listener para el evento 'wheel' (scroll con la rueda del ratón)
+  window.addEventListener("wheel", (e) => {
+    if (!locked) {
+      e.preventDefault();  // Solo prevenir el scroll vertical durante la animación
+      onScroll(e);
+    }
+  }, { passive: false });
+
+  // Backup para el scroll táctil o de teclado
+  window.addEventListener("scroll", () => {
+    const direction = window.scrollY > lastScrollY ? "down" : "up";
+    lastScrollY = window.scrollY;
+
+    if (direction === "up" && !locked && window.scrollY <= 5) {
+      resetTitleTransform();
+    }
+  });
+
+});

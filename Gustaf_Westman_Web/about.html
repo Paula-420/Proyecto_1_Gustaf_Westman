@@ -15,45 +15,54 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Cargar GSAP -->
-      <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/TextPlugin.min.js"></script>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/Observer.min.js"></script>
-    <!-- Custom CSS -->
+     
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+
     <link rel="stylesheet" href="css-about/about.css" />
 </head>
 <body>
     <section id="about" class="about-section py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10">
-                    <div id="mainTitleContainer">
-                        <h2 id="mainTitle" style="color:#ffffff; line-height:1.3;">
-                            Gustaf Westman, established in 2020 by the architect-turned-designer,
-                            is a Stockholm-based design studio.
-                        </h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-4 align-items-start gx-5" style="min-height: 350px;">
-                <div class="col-lg-6 text-center">
-                    <img id="sideImage" src="images-about/GUSTAF-FONDO-AZUL.jpg" class="img-fluid" alt="" style="max-width:100%;">
-                </div>
-                <div id="sideText" class="col-lg-5 mt-4 mt-lg-0 side-hidden"> 
-                    <p style="font-size: 1rem; color:#ffffff; line-height:1.5;">
-                        The namesake label presents objects including made-to-order furniture,
-                        custom design pieces, ceramics and glassware.
-                    </p>
-                    <p class="mt-3" style="font-size: 1rem; color:#ffffff; line-height:1.5;">
-                        Each made-to-order piece is crafted in collaboration with selected
-                        Swedish woodworkers to support a local and sustainable production process.
-                    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-12">
+                <div id="mainTitleContainer">
+                    <h2 id="mainTitle" class="animated-title" style="color:#ffffff; line-height:1.3;">
+                        Gustaf Westman, established in 2020 by the architect-turned-designer,
+                        is a Stockholm-based design studio.
+                    </h2>
                 </div>
             </div>
         </div>
-    </section>
+
+        <div class="row mt-4 align-items-start gx-5" style="min-height: 350px;">
+            <!-- Imagen a la izquierda -->
+            <div class="col-lg-6 col-md-12 text-center">
+                <img id="sideImage" src="images-about/GUSTAF-FONDO-AZUL.jpg" class="img-fluid" alt="" style="max-width:100%;">
+            </div>
+
+            <!-- Texto a la derecha -->
+            <div id="sideText" class="col-lg-5 col-md-12 mt-4 mt-lg-0 side-hidden">
+                <p style="font-size: 1rem; color:#ffffff; line-height:1.5;">
+                    The namesake label presents objects including made-to-order furniture,
+                    custom design pieces, ceramics, and glassware , all crafted with a unique aesthetic that blends functionality and beauty. Each product is designed to offer an
+                     experience that goes beyond the ordinary, elevating craftsmanship and design to new levels of creativity and quality.
+                </p>
+                <p class="mt-3" style="font-size: 1rem; color:#ffffff; line-height:1.5;">
+                    
+                    Each made-to-order piece is the result of a direct collaboration with highly skilled Swedish woodworkers, who bring their
+                     expertise to create furniture and objects that not only stand out for their innovative design but also for their sustainability. 
+                     The production process is carried out with a local and responsible approach, using the finest materials that support local artisans and contribute to an environmentally friendly
+                      manufacturing cycle. In this way, each piece is not only a reflection of contemporary design but also a commitment to sustainability and ethical production.
+
+                    
+                                    </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <section class="new-collection py-5">
         <div class="container">
@@ -96,73 +105,78 @@
             </div>
         </div>
     </section>
-   
+ 
  <section id="gsap-slider">
-        <section class="slide">
-            <div class="slide__outer">
-                <div class="slide__inner">
-                    <div class="slide__content">
-                        <div class="slide__container">
-                            <h2 class="slide__heading">MERCEDES BENZ</h2>
-                            <figure class="slide__img-cont">
-                                <img class="slide__img" src="images-about/proyecto-mercedes-ben-foto2.jpg" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-         <section class="slide">
-            <div class="slide__outer">
-                <div class="slide__inner">
-                    <div class="slide__content">
-                        <div class="slide__container">
-                            <h2 class="slide__heading">VINGARDEN</h2>
-                            <figure class="slide__img-cont">
-                                <img class="slide__img" src="images-about/proyecto-vingarden-1.jpg" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-         <section class="slide">
-            <div class="slide__outer">
-                <div class="slide__inner">
-                    <div class="slide__content">
-                        <div class="slide__container">
-                            <h2 class="slide__heading">FROZEN OBJECTS</h2>
-                            <figure class="slide__img-cont">
-                                <img class="slide__img" src="images-about/proyecto-2-foto1.jpg" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-       
-
-        <!-- Otras secciones de slides van aquí... -->
-
-        <section class="overlay">
-            <div class="overlay__content">
-            <p class="overlay__count">0<span class="count">1</span></p>
-            <figure class="overlay__img-cont">
-            <img class="image" src="images-about/proyectos-mercedes-foto-2.jpg" />
-            <img class="image" src="images-about/proyecto-vingarden-foto2.jpg" />
-            <img class="image" src="images-about/proyecto2-foto-2.jpg" />
-              
-           
+  <section class="slide">
+    <div class="slide__outer">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <div class="slide__container">
+            <h2 class="slide__heading">MERCEDES BENZ</h2>
+            <figure class="slide__img-cont">
+              <img class="slide__img" src="images-about/proyectos-mercedes-foto-2.jpg" />
             </figure>
-            </div>
-        </section>
-    </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="slide">
+    <div class="slide__outer">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <div class="slide__container">
+            <h2 class="slide__heading">VINGARDEN</h2>
+            <figure class="slide__img-cont">
+              <img class="slide__img" src="images-about/proyecto-vingarden-1.jpg" alt="" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide__outer">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <div class="slide__container">
+            <h2 class="slide__heading">FROZEN OBJECTS</h2>
+            <figure class="slide__img-cont">
+              <img class="slide__img" src="images-about/proyecto-2-foto1.jpg" alt="" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Otras secciones de slides van aquí... -->
+
+  <section class="overlay">
+    <div class="overlay__content">
+      <p class="overlay__count">0<span class="count">1</span></p>
+      <figure class="overlay__img-cont">
+        <img class="image" src="images-about/proyecto2-foto-2.jpg" />
+        <img class="image" src="images-about/proyecto-vingarden-foto2.jpg" />
+        <img class="image" src="images-about/proyecto-mercedes-ben-foto2.jpg" alt="" />
+      </figure>
+    </div>
+    <div id="scrollToTopBtn" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; display: none;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M12 16L12 4M12 4L8 8M12 4L16 8" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+</section>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <!-- GSAP -->
+     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
