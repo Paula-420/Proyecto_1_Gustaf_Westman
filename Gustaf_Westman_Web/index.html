@@ -28,27 +28,22 @@
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css-paula/index.css" />
+    <link rel="stylesheet" href="css-paula/style.css" />
 
     <!-- ESTILOS PARA LA ANIMACIÓN DE SCROLL (productos) -->
     <style>
-        /* Estado inicial: oculto y ligeramente desplazado hacia abajo */
         .product {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-
-        /* Cuando entra en el viewport */
         .product.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 
-    <!-- ESTILOS HERO + PROYECTOS -->
     <style>
-    /* ===== CSS DEL PEN ADAPTADO ===== */
     html, body {
       margin: 0;
       padding: 0;
@@ -57,7 +52,7 @@
     body {
       font-family: "Plus Jakarta Sans", sans-serif;
       background: #fff;
-      overflow-x: hidden; /* antes: overflow: hidden; ahora sí dejamos hacer scroll */
+      overflow-x: hidden;
     }
 
     .Hero {
@@ -93,7 +88,7 @@
       width: 120px;
       aspect-ratio: 1/1;
       object-fit: cover;
-      pointer-events: none; /* para que no “bloquee” el cursor */
+      pointer-events: none;
       border-radius: 32px;
       box-shadow: 0 16px 40px rgba(0,0,0,.18);
       z-index: 5;
@@ -103,9 +98,8 @@
       text-align: center;
     }
 
-    /* NAV DE PROYECTOS (FIJA ARRIBA) */
     .projects-nav {
-      position: sticky;      /* se queda pegada arriba al hacer scroll */
+      position: sticky;
       top: 0;
       z-index: 20;
       background: rgba(255,255,255,0.92);
@@ -141,7 +135,6 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     }
 
-    /* SECCIONES DE PROYECTO */
     .projects-wrapper {
       max-width: 1100px;
       margin: 0 auto 5rem;
@@ -269,6 +262,42 @@
       color: #777;
     }
   </style>
+
+
+  <style>
+    .projects-scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: #ffffff;
+      color: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+      z-index: 1200;
+    }
+    .projects-scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .projects-scroll-top i {
+      font-size: 24px;
+    }
+    .projects-scroll-top:hover {
+      transform: translateY(-3px);
+    }
+  </style>
 </head>
 
 <body>
@@ -292,7 +321,7 @@
         </div>
     </header>
 
-    <!-- ===== HERO CON TRAIL ===== -->
+    <!-- ===== GSAP ===== -->
     <section class="Hero">
       <div class="container">
         <h1 class="Hero__text heading-xl">Gustaf Westman Projects</h1>
@@ -316,7 +345,6 @@
       </div>
     </section>
 
-    <!-- NAV FIJA PARA LAS 3 SECCIONES -->
     <nav class="projects-nav">
       <div class="projects-nav__inner">
         <a href="#vingarden" class="projects-nav__link">Vingården</a>
@@ -325,7 +353,6 @@
       </div>
     </nav>
 
-    <!-- SECCIONES DE PROYECTOS -->
     <section class="projects-wrapper">
       <!-- Vingården -->
       <section id="vingarden" class="project-section">
@@ -346,7 +373,6 @@
         </div>
       </section>
 
-      <!-- Frozen Objects -->
       <section id="frozen-objects" class="project-section">
         <div class="project-image project-image--frozen">
           <div class="project-tag">Frozen Objects</div>
@@ -365,7 +391,6 @@
         </article>
       </section>
 
-      <!-- MB -->
       <section id="mb" class="project-section">
         <article class="project-card">
           <div class="project-label">Colaboración</div>
@@ -412,11 +437,8 @@
         );
       }
 
-      /* --------------------------------
-         Código del efecto de rastro
-         ------------------------------------*/
       let images = gsap.utils.toArray(".Hero__image");
-      let gap = 200; // distancia mínima que tiene que recorrer el ratón para mostrar otra imagen
+      let gap = 200;
       let index = 0;
       let wrapper = gsap.utils.wrap(0, images.length);
       gsap.defaults({ duration: 1 });
@@ -481,7 +503,7 @@
       }
     </script>
 
-    <!-- CARRITO (copiado desde shop.html) -->
+    <!-- CARRITO -->
     <section id="cart" class="cart container my-5">
       <div class="cart-header">
           <h2>Tu carrito</h2>
@@ -505,7 +527,6 @@
     <!-- FOOTER COMPLETO -->
     <footer class="footer">
         <div class="footer__inner">
-            <!-- Columna 1: Marca -->
             <div class="footer__brand">
                 <img src="imgs-paula/icon_web.gif" alt="Logo Gustaf Westman">
                 <p class="footer__brand-name">Gustaf Westman Studio</p>
@@ -514,7 +535,6 @@
                 </p>
             </div>
 
-            <!-- Columna 2: Navegación del sitio -->
             <div class="footer__column">
                 <h4 class="footer__title">Explore</h4>
                 <ul class="footer__list">
@@ -524,7 +544,6 @@
                 </ul>
             </div>
 
-            <!-- Columna 3: Contacto -->
             <div class="footer__column">
                 <h4 class="footer__title">Contact</h4>
                 <ul class="footer__list">
@@ -541,7 +560,6 @@
                 </ul>
             </div>
 
-            <!-- Columna 4: Newsletter (con bootstrap) -->
             <div class="footer__column footer__newsletter">
                 <h4 class="footer__title">Newsletter</h4>
                 <p class="footer__text">
@@ -560,9 +578,9 @@
                         >
                     </div>
                     <div class="col-12 col-md-4">
-                    <button type="submit" class="btn btn-outline-light w-100">
-                      Suscribirme
-                    </button>
+                      <button type="submit" class="btn btn-outline-light w-100">
+                        Suscribirme
+                      </button>
                     </div>
                 </form>
 
@@ -615,10 +633,10 @@
     <!-- Lenis JS -->
     <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js"></script>
 
-    <!-- JS general del sitio -->
+    <!-- JS general del sitio (carrito, scrollToTopBtn, etc.) -->
     <script src="js-paula/script.js"></script>
 
-    <!-- SMOOTH SCROLL CON LENIS (para toda la página y anchors #) -->
+    <!-- SMOOTH SCROLL CON LENIS -->
     <script>
       const lenis = new Lenis({
         lerp: 0.12,
@@ -632,17 +650,16 @@
       }
       requestAnimationFrame(raf);
 
-      // Enlaces internos con scroll suave (incluye #cart)
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", (e) => {
           const targetId = anchor.getAttribute("href");
           const targetEl = document.querySelector(targetId);
 
-          if (!targetEl) return; // si no existe, dejamos que haga lo normal
+          if (!targetEl) return;
 
           e.preventDefault();
           lenis.scrollTo(targetEl, {
-            offset: -80   // compensa el header/nav
+            offset: -80
           });
         });
       });
@@ -660,6 +677,34 @@
           0
         </span>
     </button>
+
+
+    <button id="projectsScrollTop" class="projects-scroll-top" aria-label="Volver arriba">
+      <i class="bx bx-up-arrow-alt"></i>
+    </button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('projectsScrollTop');
+        if (!btn) return;
+
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 200) {
+            btn.classList.add('show');
+          } else {
+            btn.classList.remove('show');
+          }
+        });
+
+        btn.addEventListener('click', () => {
+          if (typeof lenis !== 'undefined') {
+            lenis.scrollTo(0);
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+    </script>
 
 </body>
 </html>

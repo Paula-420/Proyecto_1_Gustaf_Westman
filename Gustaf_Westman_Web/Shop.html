@@ -6,9 +6,9 @@
     <title>Shop - Gustaf Westman</title>
 
     <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -41,6 +41,42 @@
             transform: translateY(0);
         }
     </style>
+
+
+    <style>
+      .shop-scroll-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        background: #ffffff;
+        color: #000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity .3s ease, visibility .3s ease, transform .3s ease;
+        z-index: 1200;
+      }
+      .shop-scroll-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .shop-scroll-top i {
+        font-size: 24px;
+      }
+      .shop-scroll-top:hover {
+        transform: translateY(-3px);
+      }
+    </style>
 </head>
 
 <body>
@@ -57,11 +93,11 @@
         </nav>
 
        <div class="header__cart">
-    <a href="#cart" class="js-open-cart">
-        <img src="imgs-paula/carrito de compra.png" alt="Carrito">
-        <span id="cart-count" class="cart-count">0</span>
-    </a>
-    </div>
+          <a href="#cart" class="js-open-cart">
+              <img src="imgs-paula/carrito de compra.png" alt="Carrito">
+              <span id="cart-count" class="cart-count">0</span>
+          </a>
+       </div>
 
     </header>
 
@@ -285,25 +321,25 @@
     </section>
 
     <!-- CARRITO -->
-<section id="cart" class="cart container my-5">
-    <div class="cart-header">
-        <h2>Tu carrito</h2>
-        <button type="button" class="btn-close" aria-label="Close"></button>
-    </div>
+    <section id="cart" class="cart container my-5">
+        <div class="cart-header">
+            <h2>Tu carrito</h2>
+            <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
 
-    <div id="cart-empty" class="text-muted">Tu carrito está vacío.</div>
+        <div id="cart-empty" class="text-muted">Tu carrito está vacío.</div>
 
-    <div id="cart-items"></div>
+        <div id="cart-items"></div>
 
-    <div class="cart-summary mt-3 d-flex justify-content-between align-items-center">
-        <span class="fw-bold">Total:</span>
-        <span id="cart-total" class="fw-bold">0,00 €</span>
-    </div>
+        <div class="cart-summary mt-3 d-flex justify-content-between align-items-center">
+            <span class="fw-bold">Total:</span>
+            <span id="cart-total" class="fw-bold">0,00 €</span>
+        </div>
 
-    <button id="go-to-checkout" class="btn btn-dark mt-3" disabled>
-        Ir al pago
-    </button>
-</section>
+        <button id="go-to-checkout" class="btn btn-dark mt-3" disabled>
+            Ir al pago
+        </button>
+    </section>
 
 
     <!-- FOOTER COMPLETO -->
@@ -364,12 +400,9 @@
                         >
                     </div>
                     <div class="col-12 col-md-4">
-                    <button type="submit" class="btn btn-outline-light w-100">
-                      Suscribirme
-                    </button>
-
-
-
+                      <button type="submit" class="btn btn-outline-light w-100">
+                        Suscribirme
+                      </button>
                     </div>
                 </form>
 
@@ -396,44 +429,72 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"></script>
 
-<!-- MODAL: Suscripción exitosa -->
-<div class="modal fade" id="newsletterSuccessModal" tabindex="-1" aria-labelledby="newsletterSuccessLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <!-- MODAL: Suscripción exitosa -->
+    <div class="modal fade" id="newsletterSuccessModal" tabindex="-1" aria-labelledby="newsletterSuccessLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="newsletterSuccessLabel">¡Suscripción exitosa!</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="newsletterSuccessLabel">¡Suscripción exitosa!</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            Te has suscrito correctamente al newsletter.  
+            ¡Gracias por unirte a nuestra comunidad!
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+
+        </div>
       </div>
-
-      <div class="modal-body">
-        Te has suscrito correctamente al newsletter.  
-        ¡Gracias por unirte a nuestra comunidad!
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-      </div>
-
     </div>
-  </div>
-</div>
+
     <!-- JS -->
     <script src="js-paula/script.js"></script>
 
-
-<button id="scrollToTopBtn" 
+    <!-- BOTÓN scrollToTopBtn usado por el carrito (lo dejamos igual) -->
+    <button id="scrollToTopBtn" 
         class="btn btn-dark rounded-circle shadow-lg position-fixed d-flex align-items-center justify-content-center hide"
         style="width: 60px; height: 60px; bottom: 25px; right: 25px; z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;">
     
-    <i class="bx bx-up-arrow-alt" style="font-size: 28px;"></i>
+        <i class="bx bx-up-arrow-alt" style="font-size: 28px;"></i>
 
-    <span id="scrollToTopBadge" 
-          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-          style="font-size: 14px; padding: 6px 8px;">
-      0
-    </span>
-</button>
+        <span id="scrollToTopBadge" 
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="font-size: 14px; padding: 6px 8px;">
+          0
+        </span>
+    </button>
+
+    <!-- NUEVO: flechita extra de scroll-to-top para SHOP -->
+    <button id="shopScrollTop" class="shop-scroll-top" aria-label="Volver arriba">
+        <i class="bx bx-up-arrow-alt"></i>
+    </button>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('shopScrollTop');
+        if (!btn) return;
+
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 200) {
+            btn.classList.add('show');
+          } else {
+            btn.classList.remove('show');
+          }
+        });
+
+        btn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
 
 </body>
 </html>
